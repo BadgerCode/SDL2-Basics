@@ -9,8 +9,10 @@ public:
 	~RenderController();
 
 	void ClearScreen() const;
-	void DrawPlayer(int playerX, int playerY) const;
 	void UpdateScreen() const;
+
+	void DrawRectangle(SDL_Rect* rect, int r, int g, int b, int a) const;
+	void DrawRectangleOutline(SDL_Rect* rect, int r, int g, int b, int a) const;
 
 private :
 	SDL_Renderer* _sdlRenderer;

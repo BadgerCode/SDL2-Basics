@@ -11,13 +11,13 @@ GameEngine::GameEngine(SDL_Window* sdlWindow, RenderController* renderController
 
 	_gameState = GameState::PLAY;
 
-	_playerX = _screenWidth / 2;
-	_playerY = _screenHeight / 2;
+	_player = new Player(renderController, _screenWidth / 2, _screenHeight / 2);
 }
 
 GameEngine::~GameEngine()
 {
 	delete _renderController;
+	delete _player;
 }
 
 bool GameEngine::Start()
@@ -42,12 +42,10 @@ void GameEngine::GameLoop()
 	{
 		ProcessInput();
 
-		int speed = 3;
-		_playerX += speed * (_playerMovement.Right - _playerMovement.Left);
-		_playerY += speed * (_playerMovement.Down - _playerMovement.Up);
+		_player->ProcessInput(&_playerMovement);
 		
 		_renderController->ClearScreen();
-		_renderController->DrawPlayer(_playerX, _playerY);
+		_player->Render();
 		_renderController->UpdateScreen();
 
 		SDL_Delay(16);

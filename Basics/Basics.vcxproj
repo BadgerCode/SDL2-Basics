@@ -127,11 +127,13 @@
     <ClCompile Include="GameEngine.cpp" />
     <ClCompile Include="GameEngineFactory.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="RenderController.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameEngine.h" />
     <ClInclude Include="GameEngineFactory.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="RenderController.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

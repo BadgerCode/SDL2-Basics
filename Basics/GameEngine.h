@@ -2,16 +2,9 @@
 
 #include "SDL2/SDL.h"
 #include "RenderController.h"
+#include "Player.h"
 
 enum class GameState { PLAY, EXIT };
-
-struct PlayerMovement
-{
-	bool Up;
-	bool Down;
-	bool Left;
-	bool Right;
-};
 
 class GameEngine
 {
@@ -29,8 +22,7 @@ private :
 	GameState _gameState;
 
 	PlayerMovement _playerMovement;
-	int _playerX;
-	int _playerY;
+	Player* _player;
 
 	void GameLoop();
 	void ProcessInput();

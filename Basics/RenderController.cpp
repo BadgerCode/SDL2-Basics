@@ -19,22 +19,20 @@ void RenderController::ClearScreen() const
 	SDL_RenderClear(_sdlRenderer);
 }
 
-void RenderController::DrawPlayer(int playerX, int playerY) const
-{
-	SDL_Rect r;
-	r.x = playerX;
-	r.y = playerY;
-	r.w = 25;
-	r.h = 75;
-
-	SDL_SetRenderDrawColor(_sdlRenderer, 255, 255, 255, 255);
-	SDL_RenderFillRect(_sdlRenderer, &r);
-
-	SDL_SetRenderDrawColor(_sdlRenderer, 0, 0, 0, 255);
-	SDL_RenderDrawRect(_sdlRenderer, &r);
-}
-
 void RenderController::UpdateScreen() const
 {
 	SDL_RenderPresent(_sdlRenderer);
+}
+
+
+void RenderController::DrawRectangle(SDL_Rect* rect, int r, int g, int b, int a) const
+{
+	SDL_SetRenderDrawColor(_sdlRenderer, r, g, b, a);
+	SDL_RenderFillRect(_sdlRenderer, rect);
+}
+
+void RenderController::DrawRectangleOutline(SDL_Rect* rect, int r, int g, int b, int a) const
+{
+	SDL_SetRenderDrawColor(_sdlRenderer, r, g, b, a);
+	SDL_RenderDrawRect(_sdlRenderer, rect);
 }
