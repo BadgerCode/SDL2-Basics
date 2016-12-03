@@ -88,41 +88,22 @@ void GameEngine::ProcessInput()
 		{
 			_gameState = GameState::EXIT;
 		}
-		else if(sdlEvent.type == SDL_KEYDOWN)
+		else if(sdlEvent.type == SDL_KEYDOWN || sdlEvent.type == SDL_KEYUP)
 		{
+			bool keyPressed = sdlEvent.type == SDL_KEYDOWN;
 			switch(sdlEvent.key.keysym.sym)
 			{
 			case SDLK_d:
-				_playerMovement.Right = true;
+				_playerMovement.Right = keyPressed;
 				break;
 			case SDLK_a:
-				_playerMovement.Left = true;
+				_playerMovement.Left = keyPressed;
 				break;
 			case SDLK_w:
-				_playerMovement.Up = true;
+				_playerMovement.Up = keyPressed;
 				break;
 			case SDLK_s:
-				_playerMovement.Down = true;
-				break;
-			default:
-				break;
-			}
-		}
-		else if (sdlEvent.type == SDL_KEYUP)
-		{
-			switch (sdlEvent.key.keysym.sym)
-			{
-			case SDLK_d:
-				_playerMovement.Right = false;
-				break;
-			case SDLK_a:
-				_playerMovement.Left = false;
-				break;
-			case SDLK_w:
-				_playerMovement.Up = false;
-				break;
-			case SDLK_s:
-				_playerMovement.Down = false;
+				_playerMovement.Down = keyPressed;
 				break;
 			default:
 				break;
