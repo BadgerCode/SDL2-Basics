@@ -1,6 +1,7 @@
 #pragma once
 
 #include "SDL2/SDL.h"
+#include "RenderController.h"
 
 enum class GameState { PLAY, EXIT };
 
@@ -15,13 +16,14 @@ struct PlayerMovement
 class GameEngine
 {
 public:
-	GameEngine();
+	GameEngine(SDL_Window* sdlWindow, RenderController* renderController, int screenWidth, int screenHeight);
 	~GameEngine();
-	void Initialise();
+	bool Start();
+	static const char* GetLastError();
 
 private :
 	SDL_Window* _sdlWindow;
-	SDL_Renderer* _sdlRenderer;
+	RenderController* _renderController;
 	int _screenWidth;
 	int _screenHeight;
 	GameState _gameState;
@@ -30,10 +32,7 @@ private :
 	int _playerX;
 	int _playerY;
 
-	void InitWindow();
 	void GameLoop();
-	void ClearScreen() const;
-	void DrawThings() const;
 	void ProcessInput();
 };
 

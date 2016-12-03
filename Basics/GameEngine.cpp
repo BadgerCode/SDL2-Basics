@@ -1,12 +1,14 @@
 #include "GameEngine.h"
 
 
-
-GameEngine::GameEngine()
+GameEngine::GameEngine(SDL_Window* sdlWindow, RenderController* renderController, int screenWidth, int screenHeight)
 {
-	_sdlWindow = nullptr;
-	_screenWidth = 400;
-	_screenHeight = 400;
+	_sdlWindow = sdlWindow;
+	_renderController = renderController;
+
+	_screenWidth = screenWidth;
+	_screenHeight = screenHeight;
+
 	_gameState = GameState::PLAY;
 
 	_playerX = _screenWidth / 2;
@@ -15,28 +17,23 @@ GameEngine::GameEngine()
 
 GameEngine::~GameEngine()
 {
+	delete _renderController;
 }
 
-void GameEngine::Initialise()
+bool GameEngine::Start()
 {
-	InitWindow();
+	if(_sdlWindow == nullptr || _renderController == nullptr)
+	{
+		return false;
+	}
+
 	GameLoop();
+	return true;
 }
 
-void GameEngine::InitWindow()
+const char* GameEngine::GetLastError()
 {
-	_sdlWindow = SDL_CreateWindow("Game engine",
-		SDL_WINDOWPOS_CENTERED,
-		SDL_WINDOWPOS_CENTERED,
-		_screenWidth,
-		_screenHeight,
-		SDL_WINDOW_OPENGL);
-	// TODO: check for errors when creating window (window == nullptr)
-
-	_sdlRenderer = SDL_CreateRenderer(_sdlWindow, -1, SDL_RENDERER_ACCELERATED);
-	// TODO: Check for error
-
-	SDL_RenderSetLogicalSize(_sdlRenderer, _screenWidth, _screenHeight);
+	return SDL_GetError();
 }
 
 void GameEngine::GameLoop()
@@ -49,34 +46,12 @@ void GameEngine::GameLoop()
 		_playerX += speed * (_playerMovement.Right - _playerMovement.Left);
 		_playerY += speed * (_playerMovement.Down - _playerMovement.Up);
 		
-		ClearScreen();
-		DrawThings();
-
-		SDL_RenderPresent(_sdlRenderer);
+		_renderController->ClearScreen();
+		_renderController->DrawPlayer(_playerX, _playerY);
+		_renderController->UpdateScreen();
 
 		SDL_Delay(16);
 	}
-}
-
-void GameEngine::ClearScreen() const
-{
-	SDL_SetRenderDrawColor(_sdlRenderer, 50, 120, 255, 255);
-	SDL_RenderClear(_sdlRenderer);
-}
-
-void GameEngine::DrawThings() const
-{
-	SDL_Rect r;
-	r.x = _playerX;
-	r.y = _playerY;
-	r.w = 25;
-	r.h = 75;
-
-	SDL_SetRenderDrawColor(_sdlRenderer, 255, 255, 255, 255);
-	SDL_RenderFillRect(_sdlRenderer, &r);
-
-	SDL_SetRenderDrawColor(_sdlRenderer, 0, 0, 0, 255);
-	SDL_RenderDrawRect(_sdlRenderer, &r);
 }
 
 void GameEngine::ProcessInput()
