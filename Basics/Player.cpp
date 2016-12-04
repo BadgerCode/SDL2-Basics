@@ -23,9 +23,9 @@ void Player::Render() const
 	_renderController->DrawRectangleOutline(&r, 0, 0, 0, 255);
 }
 
-void Player::ProcessInput(PlayerMovement* playerMovement)
+void Player::ProcessInput(UserInput userInput)
 {
 	int speed = 3;
-	_xPos += speed * (playerMovement->Right - playerMovement->Left);
-	_yPos += speed * (playerMovement->Down - playerMovement->Up);
+	_xPos += speed * (userInput.Right - userInput.Left);
+	_yPos += speed * (userInput.Down - userInput.Up);
 }

@@ -126,6 +126,7 @@
   <ItemGroup>
     <ClCompile Include="GameEngine.cpp" />
     <ClCompile Include="GameEngineFactory.cpp" />
+    <ClCompile Include="KeyboardController.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="RenderController.cpp" />
@@ -133,6 +134,7 @@
   <ItemGroup>
     <ClInclude Include="GameEngine.h" />
     <ClInclude Include="GameEngineFactory.h" />
+    <ClInclude Include="KeyboardController.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="RenderController.h" />
   </ItemGroup>

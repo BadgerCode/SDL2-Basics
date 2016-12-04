@@ -1,5 +1,6 @@
 #pragma once
 
+#include "KeyboardController.h"
 #include "RenderController.h"
 
 struct PlayerMovement
@@ -17,10 +18,10 @@ public:
 	~Player();
 
 	void Render() const;
-	void ProcessInput(PlayerMovement* playerMovement);
+	void ProcessInput(UserInput playerMovement);
 private:
 	RenderController* _renderController;
-	int _xPos; // TODO: Float
-	int _yPos; // TODO: Float
+	int _xPos;
+	int _yPos;
 };
 

@@ -8,7 +8,6 @@ GameEngine::GameEngine(SDL_Window* sdlWindow, RenderController* renderController
 
 	_screenWidth = screenWidth;
 	_screenHeight = screenHeight;
-
 	_gameState = GameState::PLAY;
 
 	_player = new Player(renderController, _screenWidth / 2, _screenHeight / 2);
@@ -42,7 +41,7 @@ void GameEngine::GameLoop()
 	{
 		ProcessInput();
 
-		_player->ProcessInput(&_playerMovement);
+		_player->ProcessInput(_keyboardController.GetUserInput());
 		
 		_renderController->ClearScreen();
 		_player->Render();
@@ -63,24 +62,7 @@ void GameEngine::ProcessInput()
 		}
 		else if(sdlEvent.type == SDL_KEYDOWN || sdlEvent.type == SDL_KEYUP)
 		{
-			bool keyPressed = sdlEvent.type == SDL_KEYDOWN;
-			switch(sdlEvent.key.keysym.sym)
-			{
-			case SDLK_d:
-				_playerMovement.Right = keyPressed;
-				break;
-			case SDLK_a:
-				_playerMovement.Left = keyPressed;
-				break;
-			case SDLK_w:
-				_playerMovement.Up = keyPressed;
-				break;
-			case SDLK_s:
-				_playerMovement.Down = keyPressed;
-				break;
-			default:
-				break;
-			}
+			_keyboardController.ProcessEvent(&sdlEvent);
 		}
 	}
 }
