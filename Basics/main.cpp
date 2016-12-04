@@ -4,10 +4,10 @@
 
 int main(int argc, char** argv)
 {
-	GameEngine* engine = GameEngineFactory::Create("Game basics", 400, 400);
+	auto engine = GameEngineFactory::Create("Game basics", 400, 400);
 
-	bool engineStarted = engine->Start();
-	if(!engineStarted)
+	auto gameStarted = engine->Start();
+	if(!gameStarted)
 	{
 		std::cout << "Engine error: " << engine->GetLastError() << std::endl;
 		std::cout << "Press any key to continue." << std::endl;

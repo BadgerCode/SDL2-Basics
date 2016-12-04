@@ -30,11 +30,6 @@ bool GameEngine::Start()
 	return true;
 }
 
-const char* GameEngine::GetLastError()
-{
-	return SDL_GetError();
-}
-
 void GameEngine::GameLoop()
 {
 	while(_gameState != GameState::EXIT)
@@ -47,7 +42,7 @@ void GameEngine::GameLoop()
 		_player->Render();
 		_renderController->UpdateScreen();
 
-		SDL_Delay(16);
+		SDL_Delay(16); // Gives us 60 FPS. Doesn't take into account how long this "frame" took to process.
 	}
 }
 
@@ -65,4 +60,9 @@ void GameEngine::ProcessInput()
 			_keyboardController.ProcessEvent(&sdlEvent);
 		}
 	}
+}
+
+const char* GameEngine::GetLastError()
+{
+	return SDL_GetError();
 }
