@@ -4,7 +4,7 @@
 
 int main(int argc, char** argv)
 {
-	auto engine = GameEngineFactory::Create("Game basics", 400, 400);
+	auto engine = GameEngineFactory::Create("Game basics", 1280, 720);
 
 	auto gameStarted = engine->Start();
 	if(!gameStarted)

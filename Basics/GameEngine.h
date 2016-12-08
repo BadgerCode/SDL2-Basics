@@ -2,9 +2,11 @@
 
 #include "SDL2/SDL.h"
 
+#include "Enemy.h"
 #include "KeyboardController.h"
 #include "Player.h"
 #include "RenderController.h"
+#include <vector>
 
 enum class GameState { PLAY, EXIT };
 
@@ -27,6 +29,8 @@ private :
 
 	PlayerMovement _playerMovement;
 	Player* _player;
+
+	std::vector<Enemy*> _enemies;
 
 	void GameLoop();
 	void ProcessInput();

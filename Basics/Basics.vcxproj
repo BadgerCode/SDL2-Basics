@@ -130,6 +130,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="GameEngine.cpp" />
     <ClCompile Include="GameEngineFactory.cpp" />
     <ClCompile Include="KeyboardController.cpp" />
@@ -138,6 +139,7 @@
     <ClCompile Include="RenderController.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Enemy.h" />
     <ClInclude Include="GameEngine.h" />
     <ClInclude Include="GameEngineFactory.h" />
     <ClInclude Include="KeyboardController.h" />

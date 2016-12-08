@@ -10,13 +10,17 @@ GameEngine::GameEngine(SDL_Window* sdlWindow, RenderController* renderController
 	_screenHeight = screenHeight;
 	_gameState = GameState::PLAY;
 
-	_player = new Player(renderController, _screenWidth / 2, _screenHeight / 2);
+	_player = new Player(renderController, _screenWidth / 2, _screenHeight / 2, _screenWidth, _screenHeight);
+
+	_enemies.push_back(new Enemy(renderController, 10, 10));
+	_enemies.push_back(new Enemy(renderController, 250, 700));
 }
 
 GameEngine::~GameEngine()
 {
 	delete _renderController;
 	delete _player;
+	for (auto enemy : _enemies) { delete enemy; }
 }
 
 bool GameEngine::Start()
@@ -39,7 +43,10 @@ void GameEngine::GameLoop()
 		_player->ProcessInput(_keyboardController.GetUserInput());
 		
 		_renderController->ClearScreen();
+
 		_player->Render();
+		for (auto enemy : _enemies) {enemy->Render(); }
+
 		_renderController->UpdateScreen();
 
 		SDL_Delay(16); // Gives us 60 FPS. Doesn't take into account how long this "frame" took to process.

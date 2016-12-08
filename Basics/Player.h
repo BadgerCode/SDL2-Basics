@@ -14,14 +14,18 @@ struct PlayerMovement
 class Player
 {
 public:
-	Player(RenderController* render_controller, int startX, int startY);
+	Player(RenderController* render_controller, int startX, int startY, int screenWidth, int screenHeight);
 	~Player();
 
 	void Render() const;
 	void ProcessInput(UserInput playerMovement);
 private:
 	RenderController* _renderController;
+	int _width;
+	int _height;
 	int _xPos;
 	int _yPos;
+	int _screenWidth;
+	int _screenHeight;
 };
 
