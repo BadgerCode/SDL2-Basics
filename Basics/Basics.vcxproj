@@ -69,7 +69,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(ProjectDir)\bin\$(Configuration)\</OutDir>
+    <OutDir>$(ProjectDir)bin\$(Configuration)\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -85,10 +85,12 @@
       <SubSystem>Console</SubSystem>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /d /y "$(SolutionDir)lib\*.dll" "$(OutDir)"</Command>
+      <Command>xcopy /d /y "$(SolutionDir)lib\*.dll" "$(OutDir)" &amp;
+rmdir /S /Q "$(OutDir)resources" &amp;
+xcopy /e /i /h "$(ProjectDir)resources" "$(OutDir)resources"</Command>
     </PostBuildEvent>
     <PostBuildEvent>
-      <Message>Copies required dlls</Message>
+      <Message>Copies required dlls &amp; resources</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

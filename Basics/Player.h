@@ -21,6 +21,8 @@ public:
 	void ProcessInput(UserInput playerMovement);
 private:
 	RenderController* _renderController;
+
+	SDL_Texture* _playerTexture;
 	int _width;
 	int _height;
 	int _xPos;
