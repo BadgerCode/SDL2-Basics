@@ -4,6 +4,7 @@
 
 int main(int argc, char** argv)
 {
+	srand(time(nullptr));
 	auto engine = GameEngineFactory::Create("Game basics", 1280, 720);
 
 	auto gameStarted = engine->Start();

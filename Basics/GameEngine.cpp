@@ -13,10 +13,10 @@ GameEngine::GameEngine(SDL_Window* sdlWindow, RenderController* renderController
 
 	_player = new Player(renderController, textureController->GetTexture("resources/player.png"), _screenWidth / 2, _screenHeight / 2, _screenWidth, _screenHeight);
 
-	_enemies.push_back(new Enemy(renderController, textureController->GetTexture("resources/skeleton.png"), 10, 10));
-	_enemies.push_back(new Enemy(renderController, textureController->GetTexture("resources/skeleton.png"), 120, 200));
-	_enemies.push_back(new Enemy(renderController, textureController->GetTexture("resources/skeleton.png"), 900, 300));
-	_enemies.push_back(new Enemy(renderController, textureController->GetTexture("resources/skeleton.png"), 250, 500));
+	_enemies.push_back(new Enemy(renderController, textureController->GetTexture("resources/skeleton.png"), 10, 10, _screenWidth, _screenHeight));
+	_enemies.push_back(new Enemy(renderController, textureController->GetTexture("resources/skeleton.png"), 120, 200, _screenWidth, _screenHeight));
+	_enemies.push_back(new Enemy(renderController, textureController->GetTexture("resources/skeleton.png"), 900, 300, _screenWidth, _screenHeight));
+	_enemies.push_back(new Enemy(renderController, textureController->GetTexture("resources/skeleton.png"), 250, 500, _screenWidth, _screenHeight));
 }
 
 GameEngine::~GameEngine()
@@ -52,6 +52,7 @@ void GameEngine::GameLoop()
 		ProcessInput();
 
 		_player->ProcessInput(_keyboardController.GetUserInput());
+		for (auto enemy : _enemies) { enemy->Update(); }
 		
 		_renderController->ClearScreen();
 
