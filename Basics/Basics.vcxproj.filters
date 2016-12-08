@@ -42,10 +42,10 @@
     <ClCompile Include="Enemy.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SDLTexture.cpp">
+    <ClCompile Include="TextureController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TextureController.cpp">
+    <ClCompile Include="RenderableSDLTexture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -68,10 +68,10 @@
     <ClInclude Include="Enemy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SDLTexture.h">
+    <ClInclude Include="TextureController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TextureController.h">
+    <ClInclude Include="RenderableSDLTexture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

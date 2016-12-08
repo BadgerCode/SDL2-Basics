@@ -1,5 +1,5 @@
 #pragma once
-#include "SDLTexture.h"
+#include "RenderableSDLTexture.h"
 #include <map>
 
 class TextureController
@@ -9,7 +9,7 @@ public:
 	~TextureController();
 
 	bool PreloadTexture(const std::string &str);
-	SDLTexture* GetTexture(const std::string &str);
+	RenderableSDLTexture* GetTexture(const std::string &str);
 
 private:
 	std::map<std::string, SDL_Texture*> _loadedTextures;

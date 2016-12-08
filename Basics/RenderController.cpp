@@ -25,7 +25,7 @@ void RenderController::UpdateScreen() const
 	SDL_RenderPresent(_sdlRenderer);
 }
 
-void RenderController::RenderTexture(SDLTexture* texture, int x, int y) const
+void RenderController::RenderTexture(RenderableSDLTexture* texture, int x, int y) const
 {
 	texture->TextureRect->x = x;
 	texture->TextureRect->y = y;

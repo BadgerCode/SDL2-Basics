@@ -13,8 +13,10 @@ GameEngine::GameEngine(SDL_Window* sdlWindow, RenderController* renderController
 
 	_player = new Player(renderController, textureController->GetTexture("resources/player.png"), _screenWidth / 2, _screenHeight / 2, _screenWidth, _screenHeight);
 
-	_enemies.push_back(new Enemy(renderController, 10, 10));
-	_enemies.push_back(new Enemy(renderController, 250, 700));
+	_enemies.push_back(new Enemy(renderController, textureController->GetTexture("resources/skeleton.png"), 10, 10));
+	_enemies.push_back(new Enemy(renderController, textureController->GetTexture("resources/skeleton.png"), 120, 200));
+	_enemies.push_back(new Enemy(renderController, textureController->GetTexture("resources/skeleton.png"), 900, 300));
+	_enemies.push_back(new Enemy(renderController, textureController->GetTexture("resources/skeleton.png"), 250, 500));
 }
 
 GameEngine::~GameEngine()
@@ -40,6 +42,7 @@ bool GameEngine::Start()
 void GameEngine::LoadTextures() const
 {
 	_textureController->PreloadTexture("resources/player.png");
+	_textureController->PreloadTexture("resources/skeleton.png");
 }
 
 void GameEngine::GameLoop()

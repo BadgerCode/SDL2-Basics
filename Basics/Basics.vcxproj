@@ -139,7 +139,7 @@ xcopy /e /i /h "$(ProjectDir)resources" "$(OutDir)resources"</Command>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="RenderController.cpp" />
-    <ClCompile Include="SDLTexture.cpp" />
+    <ClCompile Include="RenderableSDLTexture.cpp" />
     <ClCompile Include="TextureController.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -149,7 +149,7 @@ xcopy /e /i /h "$(ProjectDir)resources" "$(OutDir)resources"</Command>
     <ClInclude Include="KeyboardController.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="RenderController.h" />
-    <ClInclude Include="SDLTexture.h" />
+    <ClInclude Include="RenderableSDLTexture.h" />
     <ClInclude Include="TextureController.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

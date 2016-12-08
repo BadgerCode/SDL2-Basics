@@ -1,7 +1,7 @@
 #include "Player.h"
 #include <algorithm>
 
-Player::Player(RenderController* renderController, SDLTexture* playerTexture, int startX, int startY, int screenWidth, int screenHeight)
+Player::Player(RenderController* renderController, RenderableSDLTexture* playerTexture, int startX, int startY, int screenWidth, int screenHeight)
 {
 	_renderController = renderController;
 

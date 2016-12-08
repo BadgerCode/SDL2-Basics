@@ -1,7 +1,7 @@
 #pragma once
 
 #include "SDL2/SDL.h"
-#include "SDLTexture.h"
+#include "RenderableSDLTexture.h"
 
 class RenderController
 {
@@ -12,7 +12,7 @@ public:
 	void ClearScreen() const;
 	void UpdateScreen() const;
 
-	void RenderTexture(SDLTexture* texture, int x, int y) const;
+	void RenderTexture(RenderableSDLTexture* texture, int x, int y) const;
 
 	void DrawRectangle(SDL_Rect* rect, int r, int g, int b, int a) const;
 	void DrawRectangleOutline(SDL_Rect* rect, int r, int g, int b, int a) const;

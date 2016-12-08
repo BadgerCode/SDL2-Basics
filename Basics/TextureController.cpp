@@ -23,7 +23,7 @@ bool TextureController::PreloadTexture(const std::string& str)
 	return true;
 }
 
-SDLTexture* TextureController::GetTexture(const std::string& str)
+RenderableSDLTexture* TextureController::GetTexture(const std::string& str)
 {
 	auto foundTexture = _loadedTextures.find(str);
 	if(foundTexture == _loadedTextures.end())
@@ -39,5 +39,5 @@ SDLTexture* TextureController::GetTexture(const std::string& str)
 	auto rawTexture = foundTexture->second;
 	int width, height;
 	SDL_QueryTexture(rawTexture, nullptr, nullptr, &width, &height);
-	return new SDLTexture(rawTexture, width, height);
+	return new RenderableSDLTexture(rawTexture, width, height);
 }
