@@ -21,6 +21,7 @@ GameEngine* GameEngineFactory::Create(const char* windowTitle, int screenWidth, 
 		SDL_WINDOW_OPENGL);
 	auto sdlRenderer = SDL_CreateRenderer(sdlWindow, -1, SDL_RENDERER_ACCELERATED);
 	auto renderController = new RenderController(sdlRenderer, screenWidth, screenHeight);
+	auto textureController = new TextureController(sdlRenderer);
 
-	return new GameEngine(sdlWindow, renderController, screenWidth, screenHeight);
+	return new GameEngine(sdlWindow, renderController, textureController, screenWidth, screenHeight);
 }

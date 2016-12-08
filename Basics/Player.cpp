@@ -1,8 +1,7 @@
 #include "Player.h"
-#include "SDL2/SDL_image.h"
 #include <algorithm>
 
-Player::Player(RenderController* renderController, int startX, int startY, int screenWidth, int screenHeight)
+Player::Player(RenderController* renderController, SDLTexture* playerTexture, int startX, int startY, int screenWidth, int screenHeight)
 {
 	_renderController = renderController;
 
@@ -11,8 +10,9 @@ Player::Player(RenderController* renderController, int startX, int startY, int s
 	_screenWidth = screenWidth;
 	_screenHeight = screenHeight;
 
-	_playerTexture = renderController->LoadTexture("resources/player.png");
-	SDL_QueryTexture(_playerTexture, nullptr, nullptr, &_width, &_height);
+	_playerTexture = playerTexture;
+	_width = _playerTexture->TextureRect->w;
+	_height = _playerTexture->TextureRect->h;
 }
 
 Player::~Player()

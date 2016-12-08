@@ -2,6 +2,7 @@
 
 #include "KeyboardController.h"
 #include "RenderController.h"
+#include "SDLTexture.h"
 
 struct PlayerMovement
 {
@@ -14,7 +15,7 @@ struct PlayerMovement
 class Player
 {
 public:
-	Player(RenderController* render_controller, int startX, int startY, int screenWidth, int screenHeight);
+	Player(RenderController* render_controller, SDLTexture* playerTexture, int startX, int startY, int screenWidth, int screenHeight);
 	~Player();
 
 	void Render() const;
@@ -22,7 +23,7 @@ public:
 private:
 	RenderController* _renderController;
 
-	SDL_Texture* _playerTexture;
+	SDLTexture* _playerTexture;
 	int _width;
 	int _height;
 	int _xPos;

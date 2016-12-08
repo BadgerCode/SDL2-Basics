@@ -1,5 +1,5 @@
 #include "RenderController.h"
-#include <SDL2/SDL_image.h>
+
 
 
 RenderController::RenderController(SDL_Renderer* renderer, int screenWidth, int screenHeight)
@@ -25,24 +25,12 @@ void RenderController::UpdateScreen() const
 	SDL_RenderPresent(_sdlRenderer);
 }
 
-SDL_Texture* RenderController::LoadTexture(const std::string& str) const
+void RenderController::RenderTexture(SDLTexture* texture, int x, int y) const
 {
-	auto texture = IMG_LoadTexture(_sdlRenderer, str.c_str());
-	//TODO: What if texture fails to load?
-	if(texture == nullptr)
-	{
-		printf("Error loading texture");
-	}
-	return texture;
-}
+	texture->TextureRect->x = x;
+	texture->TextureRect->y = y;
 
-void RenderController::RenderTexture(SDL_Texture* texture, int x, int y) const
-{
-	SDL_Rect rect;
-	rect.x = x;
-	rect.y = y;
-	SDL_QueryTexture(texture, nullptr, nullptr, &rect.w, &rect.h);
-	SDL_RenderCopy(_sdlRenderer, texture, nullptr, &rect);
+	SDL_RenderCopy(_sdlRenderer, texture->RawTexture, nullptr, texture->TextureRect);
 }
 
 void RenderController::DrawRectangle(SDL_Rect* rect, int r, int g, int b, int a) const
