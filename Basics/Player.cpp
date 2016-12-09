@@ -2,7 +2,9 @@
 #include <algorithm>
 
 
-Player::Player(RenderController* renderController, KeyboardController* keyboardController, RenderableSDLTexture* playerTexture, int startX, int startY, int screenWidth, int screenHeight)
+Player::Player(RenderController* renderController, KeyboardController* keyboardController, 
+				RenderableSDLTexture* playerTexture, int startX, int startY, int screenWidth, 
+				int screenHeight)
 {
 	_renderController = renderController;
 	_keyboardController = keyboardController;

@@ -3,7 +3,7 @@
 #include "TextureController.h"
 #include "Player.h"
 
-class Enemy;
+class Entity;
 
 class EntityController
 {
@@ -22,7 +22,7 @@ private:
 	KeyboardController* _keyboardController;
 
 	Player* _player;
-	std::vector<Enemy*> _entities;
+	std::vector<Entity*> _entities;
 	int _screenWidth;
 	int _screenHeight;
 };

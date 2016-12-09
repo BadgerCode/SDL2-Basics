@@ -4,14 +4,13 @@
 #include <ctime>
 #include "Entity.h"
 
-class Enemy : Entity
+class Enemy : public Entity
 {
 public:
 	Enemy(RenderController* renderController, EntityController* entityController, RenderableSDLTexture* enemyTexture, int startX, int startY, int screenWidth, int screenHeight);
 	~Enemy();
-
-	void Render() const;
-	void Update();
+	void Render() const override;
+	void Update() override;
 private:
 	RenderController* _renderController;
 	RenderableSDLTexture* _enemyTexture;
