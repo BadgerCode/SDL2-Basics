@@ -25,6 +25,12 @@
     <Filter Include="Source Files\Controllers">
       <UniqueIdentifier>{cedd232d-79d8-4deb-a4c7-70e58f7b7490}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Models">
+      <UniqueIdentifier>{013a2205-0748-4fe7-8210-e75ab31c36ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Models">
+      <UniqueIdentifier>{d70f806b-eb01-46bb-ae8b-1385d224b2ae}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -35,15 +41,6 @@
     </ClCompile>
     <ClCompile Include="GameEngineFactory.cpp">
       <Filter>Source Files\Factories</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RenderableSDLTexture.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SDLWindowFactory.cpp">
       <Filter>Source Files\Factories</Filter>
@@ -63,6 +60,15 @@
     <ClCompile Include="TextureController.cpp">
       <Filter>Source Files\Controllers</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Source Files\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderableSDLTexture.cpp">
+      <Filter>Source Files\Models</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameEngine.h">
@@ -70,15 +76,6 @@
     </ClInclude>
     <ClInclude Include="GameEngineFactory.h">
       <Filter>Header Files\Factories</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="RenderableSDLTexture.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SDLWindowFactory.h">
       <Filter>Header Files\Factories</Filter>
@@ -97,6 +94,15 @@
     </ClInclude>
     <ClInclude Include="TextureController.h">
       <Filter>Header Files\Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Header Files\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Header Files\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderableSDLTexture.h">
+      <Filter>Header Files\Models</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
