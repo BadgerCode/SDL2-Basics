@@ -2,11 +2,12 @@
 
 #include "RenderController.h"
 #include <ctime>
+#include "Entity.h"
 
-class Enemy
+class Enemy : Entity
 {
 public:
-	Enemy(RenderController* renderController, RenderableSDLTexture* enemyTexture, int startX, int startY, int screenWidth, int screenHeight);
+	Enemy(RenderController* renderController, EntityController* entityController, RenderableSDLTexture* enemyTexture, int startX, int startY, int screenWidth, int screenHeight);
 	~Enemy();
 
 	void Render() const;

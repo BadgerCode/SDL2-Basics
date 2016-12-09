@@ -1,4 +1,6 @@
 #include "EntityController.h"
+#include "Enemy.h"
+#include "Entity.h"
 
 
 EntityController::EntityController(RenderController* renderController, KeyboardController* keyboardController, 
@@ -24,7 +26,7 @@ EntityController::~EntityController()
 
 void EntityController::AddEnemy(int spawnX, int spawnY)
 {
-	_entities.push_back(new Enemy(_renderController, _textureController->GetTexture("resources/skeleton.png"), spawnX, spawnY, _screenWidth, _screenHeight));
+	_entities.push_back(new Enemy(_renderController, this, _textureController->GetTexture("resources/skeleton.png"), spawnX, spawnY, _screenWidth, _screenHeight));
 }
 
 void EntityController::UpdateAll()

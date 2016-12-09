@@ -104,5 +104,8 @@
     <ClInclude Include="RenderableSDLTexture.h">
       <Filter>Header Files\Models</Filter>
     </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Header Files\Models</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

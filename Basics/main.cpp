@@ -3,6 +3,7 @@
 #include <string>
 #include "SDLRendererFactory.h"
 #include "SDLWindowFactory.h"
+#include <ctime>
 
 int main(int argc, char** argv)
 {

@@ -1,8 +1,9 @@
 #pragma once
 #include <vector>
-#include "Enemy.h"
 #include "TextureController.h"
 #include "Player.h"
+
+class Enemy;
 
 class EntityController
 {

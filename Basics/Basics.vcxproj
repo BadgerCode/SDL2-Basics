@@ -147,6 +147,7 @@ xcopy /e /i /h "$(ProjectDir)resources" "$(OutDir)resources"</Command>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="Entity.h" />
     <ClInclude Include="EntityController.h" />
     <ClInclude Include="GameEngine.h" />
     <ClInclude Include="GameEngineFactory.h" />

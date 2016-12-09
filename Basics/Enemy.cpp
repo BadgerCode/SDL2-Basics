@@ -1,9 +1,11 @@
 #include "Enemy.h"
+#include "EntityController.h"
 #include <cstdlib>
 #include <algorithm>
 
 
-Enemy::Enemy(RenderController* renderController, RenderableSDLTexture* enemyTexture, int startX, int startY, int screenWidth, int screenHeight)
+Enemy::Enemy(RenderController* renderController, EntityController* entityController, 
+			RenderableSDLTexture* enemyTexture, int startX, int startY, int screenWidth, int screenHeight): Entity(entityController)
 {
 	_renderController = renderController;
 	_enemyTexture = enemyTexture;
@@ -66,8 +68,8 @@ void Enemy::Update()
 		else
 		{
 			auto ratioOfDistance = static_cast<double>(Speed) / distance;
-			_xPos -= ratioOfDistance * xDistance;
-			_yPos -= ratioOfDistance * yDistance;
+			_xPos -= static_cast<int>(ratioOfDistance * xDistance);
+			_yPos -= static_cast<int>(ratioOfDistance * yDistance);
 		}
 	}
 }
