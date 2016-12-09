@@ -26,17 +26,41 @@ EntityController::~EntityController()
 
 void EntityController::AddEnemy(int spawnX, int spawnY)
 {
-	_entities.push_back(new Enemy(_renderController, this, _textureController->GetTexture("resources/skeleton.png"), spawnX, spawnY, _screenWidth, _screenHeight));
+	_newEntities.push(new Enemy(_renderController, this, _textureController->GetTexture("resources/skeleton.png"), spawnX, spawnY, _screenWidth, _screenHeight));
 }
 
 void EntityController::UpdateAll()
 {
 	_player->Update();
 	for (auto entity : _entities) { entity->Update(); }
+
+	while(!_newEntities.empty())
+	{
+		_entities.push_back(_newEntities.front());
+		_newEntities.pop();
+	}
 }
 
 void EntityController::RenderAll()
 {
 	_player->Render();
 	for (auto entity : _entities) { entity->Render(); }
+}
+
+std::vector<Entity*> EntityController::FindInRange(int x, int y, int radius)
+{
+	std::vector<Entity*> entitiesInRange;
+	for (auto entity : _entities)
+	{
+		auto entityPos = entity->GetPosition();
+		auto xDiff = x - entityPos.first;
+		auto yDiff = y - entityPos.second;
+		auto distance = sqrt(xDiff*xDiff + yDiff*yDiff);
+
+		if(distance <= radius)
+		{
+			entitiesInRange.push_back(entity);
+		}
+	}
+	return entitiesInRange;
 }

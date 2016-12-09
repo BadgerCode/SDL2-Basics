@@ -74,6 +74,11 @@ void Enemy::Update()
 	}
 }
 
+std::pair<int, int> Enemy::GetPosition() const
+{
+	return std::pair<int, int>(_xPos, _yPos);
+}
+
 clock_t Enemy::GetNewMovementTime()
 {
 	 return clock() + rand() % 3 * 1000 + 1000;
