@@ -1,9 +1,11 @@
 #include "Player.h"
 #include <algorithm>
 
-Player::Player(RenderController* renderController, RenderableSDLTexture* playerTexture, int startX, int startY, int screenWidth, int screenHeight)
+
+Player::Player(RenderController* renderController, KeyboardController* keyboardController, RenderableSDLTexture* playerTexture, int startX, int startY, int screenWidth, int screenHeight)
 {
 	_renderController = renderController;
+	_keyboardController = keyboardController;
 
 	_xPos = startX;
 	_yPos = startY;
@@ -24,8 +26,10 @@ void Player::Render() const
 	_renderController->RenderTexture(_playerTexture, _xPos, _yPos);
 }
 
-void Player::ProcessInput(UserInput userInput)
+void Player::Update()
 {
+	auto userInput = _keyboardController->GetUserInput();
+
 	// TODO: Diagonal speed needs to be fixed (is too fast)
 	int speed = 3;
 	_xPos = std::min(_screenWidth - _width, std::max(0, _xPos + speed * (userInput.Right - userInput.Left)));

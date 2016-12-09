@@ -15,15 +15,17 @@ struct PlayerMovement
 class Player
 {
 public:
-	Player(RenderController* render_controller, RenderableSDLTexture* playerTexture, int startX, int startY, int screenWidth, int screenHeight);
+	Player(RenderController* renderController, KeyboardController* keyboardController, RenderableSDLTexture* playerTexture, int startX, int startY, int screenWidth, int screenHeight);
 	~Player();
 
 	void Render() const;
-	void ProcessInput(UserInput playerMovement);
+	void Update();
 private:
 	RenderController* _renderController;
+	KeyboardController* _keyboardController;
 
 	RenderableSDLTexture* _playerTexture;
+
 	int _width;
 	int _height;
 	int _xPos;

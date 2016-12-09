@@ -4,6 +4,10 @@
 
 KeyboardController::KeyboardController()
 {
+	_userInput.Up = false;
+	_userInput.Down = false;
+	_userInput.Left = false;
+	_userInput.Right = false;
 }
 
 

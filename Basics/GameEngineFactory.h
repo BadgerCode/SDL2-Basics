@@ -7,6 +7,6 @@ public:
 	GameEngineFactory();
 	~GameEngineFactory();
 
-	static GameEngine* Create(const char* windowTitle, int screenWidth, int screenHeight);
+	static GameEngine* Create(SDL_Renderer* sdlRenderer, int screenWidth, int screenHeight);
 };
 
