@@ -17,6 +17,8 @@ Enemy::Enemy(RenderController* renderController, EntityController* entityControl
 	_targetXPos = _xPos;
 	_targetYPos = _yPos;
 	_nextMovementTime = GetNewMovementTime();
+
+	_lastSpawnTime = clock() + 4000;
 }
 
 Enemy::~Enemy()
@@ -30,6 +32,25 @@ void Enemy::Render() const
 
 void Enemy::Update()
 {
+	if (clock() > _lastSpawnTime + 1000) {
+		_lastSpawnTime = clock();
+
+		auto closeEntities = _entityController->FindInRange(_xPos + _enemyTexture->TextureRect->w / 2, _yPos + _enemyTexture->TextureRect->h / 2, 100);
+		for (auto entity : closeEntities)
+		{
+			auto enemy = dynamic_cast<Enemy*>(entity);
+			if(entity == this || enemy == nullptr || enemy->GetLastSpawnTime() + 1000 < clock())
+			{
+				continue;
+			}
+
+			auto entityPosition = entity->GetPosition();
+			auto spawn_x = _xPos + (entityPosition.first - _xPos) / 2;
+			auto spawn_y = _yPos + (entityPosition.second - _yPos) / 2;
+			_entityController->AddEnemy(spawn_x, spawn_y);
+		}
+	}
+
 	auto atTargetPosition = _xPos == _targetXPos && _yPos == _targetYPos;
 	if(atTargetPosition)
 	{
@@ -72,6 +93,16 @@ void Enemy::Update()
 			_yPos -= static_cast<int>(ratioOfDistance * yDistance);
 		}
 	}
+}
+
+std::pair<int, int> Enemy::GetPosition() const
+{
+	return std::pair<int, int>(_xPos, _yPos);
+}
+
+clock_t Enemy::GetLastSpawnTime() const
+{
+	return _lastSpawnTime;
 }
 
 clock_t Enemy::GetNewMovementTime()

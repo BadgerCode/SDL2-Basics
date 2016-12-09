@@ -11,6 +11,8 @@ public:
 	~Enemy();
 	void Render() const override;
 	void Update() override;
+	std::pair<int, int> GetPosition() const override;
+	clock_t GetLastSpawnTime() const;
 private:
 	RenderController* _renderController;
 	RenderableSDLTexture* _enemyTexture;
@@ -26,5 +28,7 @@ private:
 	static clock_t GetNewMovementTime();
 	static const int Speed = 3;
 	static const int MovementRadius = 250;
+
+	clock_t _lastSpawnTime;
 };
 

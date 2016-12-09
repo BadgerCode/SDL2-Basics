@@ -2,6 +2,7 @@
 #include <vector>
 #include "TextureController.h"
 #include "Player.h"
+#include <queue>
 
 class Entity;
 
@@ -15,6 +16,7 @@ public:
 	void AddEnemy(int spawnX, int spawnY);
 	void UpdateAll();
 	void RenderAll();
+	std::vector<Entity*> FindInRange(int x, int y, int radius);
 
 private:
 	RenderController* _renderController;
@@ -23,6 +25,7 @@ private:
 
 	Player* _player;
 	std::vector<Entity*> _entities;
+	std::queue<Entity*> _newEntities;
 	int _screenWidth;
 	int _screenHeight;
 };
