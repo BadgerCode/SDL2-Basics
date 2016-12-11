@@ -2,10 +2,13 @@
 
 
 GameEngine::GameEngine(RenderController* renderController, 
-						KeyboardController* keyboardController, TextureController* textureController, 
+						LightingController* lightingController,
+						KeyboardController* keyboardController, 
+						TextureController* textureController, 
 						EntityController* entityController)
 {
 	_renderController = renderController;
+	_lightingController = lightingController;
 	_keyboardController = keyboardController;
 	_textureController = textureController;
 	_entityController = entityController;
@@ -31,7 +34,9 @@ void GameEngine::Start()
 void GameEngine::LoadTextures() const
 {
 	_textureController->PreloadTexture("resources/grass.png");
+	_textureController->PreloadTexture("resources/lightsource.png");
 	_textureController->PreloadTexture("resources/player.png");
+	_textureController->PreloadTexture("resources/playerlight.png");
 	_textureController->PreloadTexture("resources/skeleton.png");
 	_renderController->PreloadBackground();
 }
@@ -54,7 +59,10 @@ void GameEngine::GameLoop()
 		
 		_renderController->ClearScreen();
 		_renderController->DrawBackground();
+
 		_entityController->RenderAll();
+
+		_lightingController->RenderLighting();
 		_renderController->UpdateScreen();
 
 		SDL_Delay(16); // Gives us 60 FPS. Doesn't take into account how long this "frame" took to process.
