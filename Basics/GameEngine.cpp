@@ -30,8 +30,10 @@ void GameEngine::Start()
 
 void GameEngine::LoadTextures() const
 {
+	_textureController->PreloadTexture("resources/grass.png");
 	_textureController->PreloadTexture("resources/player.png");
 	_textureController->PreloadTexture("resources/skeleton.png");
+	_renderController->PreloadBackground();
 }
 
 void GameEngine::CreateEntities() const
@@ -51,6 +53,7 @@ void GameEngine::GameLoop()
 		_entityController->UpdateAll();
 		
 		_renderController->ClearScreen();
+		_renderController->DrawBackground();
 		_entityController->RenderAll();
 		_renderController->UpdateScreen();
 
