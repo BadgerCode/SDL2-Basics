@@ -1,5 +1,6 @@
 #pragma once
 #include "RenderController.h"
+#include <ctime>
 
 class EntityController;
 
@@ -21,5 +22,8 @@ private:
 
 	RenderableSDLTexture* _testLightTexture;
 	RenderableSDLTexture* _playerLight;
+
+	clock_t _startOfDay;
+	int GetDayBrightness();
 };
 
