@@ -20,6 +20,7 @@ public:
 
 	void Render() const;
 	void Update();
+	std::pair<int, int> GetPosition() const;
 private:
 	RenderController* _renderController;
 	KeyboardController* _keyboardController;

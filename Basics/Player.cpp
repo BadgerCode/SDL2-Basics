@@ -37,3 +37,8 @@ void Player::Update()
 	_xPos = std::min(_screenWidth - _width, std::max(0, _xPos + speed * (userInput.Right - userInput.Left)));
 	_yPos = std::min(_screenHeight - _height, std::max(0, _yPos + speed * (userInput.Down - userInput.Up)));
 }
+
+std::pair<int, int> Player::GetPosition() const
+{
+	return std::pair<int, int>(_xPos, _yPos);
+}

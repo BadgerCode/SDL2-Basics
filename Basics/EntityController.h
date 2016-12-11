@@ -17,6 +17,7 @@ public:
 	void UpdateAll();
 	void RenderAll();
 	std::vector<Entity*> FindInRange(int x, int y, int radius);
+	std::pair<int, int> GetPlayerPosition() const;
 private:
 	RenderController* _renderController;
 	TextureController* _textureController;

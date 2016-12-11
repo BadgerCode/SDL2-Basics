@@ -64,3 +64,8 @@ std::vector<Entity*> EntityController::FindInRange(int x, int y, int radius)
 	}
 	return entitiesInRange;
 }
+
+std::pair<int, int> EntityController::GetPlayerPosition() const
+{
+	return _player->GetPosition();
+}
