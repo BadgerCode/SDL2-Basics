@@ -5,13 +5,15 @@ GameEngine::GameEngine(RenderController* renderController,
 						LightingController* lightingController,
 						KeyboardController* keyboardController, 
 						TextureController* textureController, 
-						EntityController* entityController)
+						EntityController* entityController,
+						TimeController* timeController)
 {
 	_renderController = renderController;
 	_lightingController = lightingController;
 	_keyboardController = keyboardController;
 	_textureController = textureController;
 	_entityController = entityController;
+	_timeController = timeController;
 
 	_gameState = GameState::PLAY;
 }
@@ -53,6 +55,8 @@ void GameEngine::GameLoop()
 {
 	while(_gameState != GameState::EXIT)
 	{
+		_timeController->Update();
+
 		ProcessInput();
 
 		_entityController->UpdateAll();

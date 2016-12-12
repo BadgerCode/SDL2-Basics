@@ -145,6 +145,7 @@ xcopy /e /i /h "$(ProjectDir)resources" "$(OutDir)resources"</Command>
     <ClCompile Include="SDLRendererFactory.cpp" />
     <ClCompile Include="SDLWindowFactory.cpp" />
     <ClCompile Include="TextureController.cpp" />
+    <ClCompile Include="TimeController.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Enemy.h" />
@@ -160,6 +161,7 @@ xcopy /e /i /h "$(ProjectDir)resources" "$(OutDir)resources"</Command>
     <ClInclude Include="SDLRendererFactory.h" />
     <ClInclude Include="SDLWindowFactory.h" />
     <ClInclude Include="TextureController.h" />
+    <ClInclude Include="TimeController.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

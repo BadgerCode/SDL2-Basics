@@ -5,12 +5,13 @@
 
 LightingController::LightingController(SDL_Renderer* sdlRenderer, RenderController* renderController, 
 										EntityController* entityController, TextureController* textureController, 
-										int screenWidth, int screenheight)
+										TimeController* timeController, int screenWidth, int screenheight)
 {
 	_sdlRenderer = sdlRenderer;
 	_renderController = renderController;
 	_entityController = entityController;
 	_textureController = textureController;
+	_timeController = timeController;
 	_screenWidth = screenWidth;
 	_screenHeight = screenheight;
 
@@ -29,47 +30,7 @@ LightingController::~LightingController()
 	delete _testLightTexture;
 }
 
-int LightingController::GetDayBrightness()
-{
-	auto secondsPerNight = 10;
-	auto secondsPerDawn = 2;
-	auto secondsPerDaylight = 10;
-	auto secondsPerDusk = 2;
-	auto secondsPerDay = secondsPerNight + secondsPerDawn + secondsPerDaylight + secondsPerDusk;
-
-	auto currentHour = (static_cast<double>(clock()) - _startOfDay) / CLOCKS_PER_SEC;
-	if(currentHour >= secondsPerDay)
-	{
-		_startOfDay = clock();
-		currentHour = 0;
-	}
-
-	auto isNighttime = currentHour < (secondsPerNight / 2) || currentHour >= secondsPerDay - (secondsPerNight / 2);
-	if (isNighttime)
-	{
-		return 0;
-	}
-
-	auto isDawn = currentHour < (secondsPerNight / 2) + secondsPerDawn;
-	if(isDawn)
-	{
-		auto timeInDawn = currentHour - (secondsPerNight / 2);
-		return 255 * (static_cast<double>(timeInDawn) / secondsPerDawn);
-	}
-
-	auto duskStartTime = secondsPerDay - (secondsPerNight / 2) - secondsPerDusk;
-	auto isDusk = currentHour >= duskStartTime;
-	if(isDusk)
-	{
-		auto timeInDusk = currentHour - duskStartTime;
-		return 255 - 255 * (static_cast<double>(timeInDusk) / secondsPerDusk);
-	}
-
-	
-	return 255;
-}
-
-void LightingController::RenderLighting()
+void LightingController::RenderLighting() const
 {
 	// Create a darkness texture
 		// Full size of screen
@@ -101,7 +62,7 @@ void LightingController::RenderLighting()
 	auto brightness = GetDayBrightness();
 	_renderController->DrawRectangle(&rect, brightness, brightness, brightness, 255);
 
-	if (brightness < 240) {
+	if (brightness < 230) {
 		auto playerPos = _entityController->GetPlayerPosition();
 		_renderController->RenderTexture(_playerLight, playerPos.first - (_playerLight->TextureRect->w / 2), playerPos.second - (_playerLight->TextureRect->h / 2));
 
@@ -117,4 +78,21 @@ void LightingController::RenderLighting()
 	SDL_RenderCopy(_sdlRenderer, lightingTexture, nullptr, nullptr);
 
 	SDL_DestroyTexture(lightingTexture);
+}
+
+int LightingController::GetDayBrightness() const
+{
+	auto timeOfDay = _timeController->GetTimeOfDay();
+
+	switch (timeOfDay)
+	{
+	case TimeOfDay::Night:
+		return 0;
+	case TimeOfDay::Dawn:
+		return 255 * _timeController->GetPercentageOfDawnCompleted();
+	case TimeOfDay::Dusk:
+		return 255 - 255 * _timeController->GetPercentageOfDuskCompleted();
+	default:
+		return 255;
+	}
 }

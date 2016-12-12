@@ -5,6 +5,7 @@
 #include "RenderController.h"
 #include "TextureController.h"
 #include "LightingController.h"
+#include "TimeController.h"
 
 class EntityController;
 
@@ -16,7 +17,9 @@ public:
 	GameEngine(RenderController* renderController, 
 				LightingController* lightingController,
 				KeyboardController* keyboardController,
-				TextureController* textureController, EntityController* entityController);
+				TextureController* textureController, 
+				EntityController* entityController,
+				TimeController* timeController);
 	~GameEngine();
 	void Start();
 
@@ -26,6 +29,7 @@ private :
 	KeyboardController* _keyboardController;
 	TextureController* _textureController;
 	EntityController* _entityController;
+	TimeController* _timeController;
 
 	GameState _gameState;
 

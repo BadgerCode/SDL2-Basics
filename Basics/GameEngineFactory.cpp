@@ -1,4 +1,5 @@
 #include "GameEngineFactory.h"
+#include "TimeController.h"
 
 
 GameEngineFactory::GameEngineFactory()
@@ -16,8 +17,9 @@ GameEngine* GameEngineFactory::Create(SDL_Renderer* sdlRenderer, int screenWidth
 	auto keyboardController = new KeyboardController();
 	auto entityController = new EntityController(renderController, keyboardController, 
 													textureController, screenWidth, screenHeight);
-	auto lightingController = new LightingController(sdlRenderer, renderController, entityController, textureController, screenWidth, screenHeight);
+	auto timeController = new TimeController();
+	auto lightingController = new LightingController(sdlRenderer, renderController, entityController, textureController, timeController, screenWidth, screenHeight);
 
 	return new GameEngine(renderController, lightingController, keyboardController,
-							textureController, entityController);
+							textureController, entityController, timeController);
 }
