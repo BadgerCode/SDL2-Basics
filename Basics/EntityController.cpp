@@ -41,10 +41,10 @@ void EntityController::UpdateAll()
 	}
 }
 
-void EntityController::RenderAll()
+void EntityController::RenderAll() const
 {
 	_player->Render();
-	for (auto entity : _entities) { entity->Render(); }
+//	for (auto entity : _entities) { entity->Render(); }
 }
 
 std::vector<Entity*> EntityController::FindInRange(int x, int y, int radius)

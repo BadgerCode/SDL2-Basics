@@ -15,7 +15,7 @@ public:
 
 	void AddEnemy(int spawnX, int spawnY);
 	void UpdateAll();
-	void RenderAll();
+	void RenderAll() const;
 	std::vector<Entity*> FindInRange(int x, int y, int radius);
 	std::pair<int, int> GetPlayerPosition() const;
 private:

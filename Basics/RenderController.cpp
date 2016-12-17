@@ -1,5 +1,5 @@
 #include "RenderController.h"
-
+#include <SDL2/SDL_ttf.h>
 
 
 RenderController::RenderController(SDL_Renderer* renderer, TextureController* textureController, int screenWidth, int screenHeight)
@@ -65,6 +65,25 @@ void RenderController::RenderTexture(RenderableSDLTexture* texture, int x, int y
 	texture->TextureRect->y = y;
 
 	SDL_RenderCopy(_sdlRenderer, texture->RawTexture, nullptr, texture->TextureRect);
+}
+
+void RenderController::RenderText(TTF_Font* font, const char* text, SDL_Color color, int x, int y) const
+{
+	auto surface = TTF_RenderText_Solid(font, text, color);
+	auto texture = SDL_CreateTextureFromSurface(_sdlRenderer, surface);
+	SDL_FreeSurface(surface);
+
+	SDL_Rect textureRect;
+	SDL_QueryTexture(texture, nullptr, nullptr, &textureRect.w, &textureRect.h);
+
+	textureRect.x = x;
+	textureRect.y = y;
+
+	auto renderableTexture = new RenderableSDLTexture(texture, textureRect.w, textureRect.h);
+
+	RenderTexture(renderableTexture, x, y);
+
+//	delete renderableTexture;
 }
 
 void RenderController::DrawRectangle(SDL_Rect* rect, int r, int g, int b, int a) const

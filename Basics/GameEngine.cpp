@@ -66,7 +66,7 @@ void GameEngine::GameLoop()
 
 		_entityController->RenderAll();
 
-		_lightingController->RenderLighting();
+//		_lightingController->RenderLighting();
 		_renderController->UpdateScreen();
 
 		SDL_Delay(16); // Gives us 60 FPS. Doesn't take into account how long this "frame" took to process.

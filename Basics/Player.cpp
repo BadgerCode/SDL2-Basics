@@ -1,5 +1,4 @@
 #include "Player.h"
-#include <algorithm>
 
 
 Player::Player(RenderController* renderController, KeyboardController* keyboardController, 
@@ -9,23 +8,31 @@ Player::Player(RenderController* renderController, KeyboardController* keyboardC
 	_renderController = renderController;
 	_keyboardController = keyboardController;
 
-	_xPos = startX;
-	_yPos = startY;
+	_worldX = startX;
+	_worldY = startY;
 	_screenWidth = screenWidth;
 	_screenHeight = screenHeight;
 
 	_playerTexture = playerTexture;
 	_width = _playerTexture->TextureRect->w;
 	_height = _playerTexture->TextureRect->h;
+
+	_playerFont = TTF_OpenFont("resources/arial.ttf", 50);
 }
 
 Player::~Player()
 {
+	TTF_CloseFont(_playerFont);
 }
 
 void Player::Render() const
 {
-	_renderController->RenderTexture(_playerTexture, _xPos, _yPos);
+	_renderController->RenderTexture(_playerTexture, _screenWidth / 2 - _height / 2, _screenHeight / 2 - _width / 2);
+
+	char buffer[100];
+	sprintf_s(buffer, "(%d, %d)", _worldX, _worldY);
+	SDL_Color fontColor = { 0, 0, 0, 255 };
+	_renderController->RenderText(_playerFont, buffer, fontColor, 200, 200);
 }
 
 void Player::Update()
@@ -34,11 +41,13 @@ void Player::Update()
 
 	// TODO: Diagonal speed needs to be fixed (is too fast)
 	int speed = 3;
-	_xPos = std::min(_screenWidth - _width, std::max(0, _xPos + speed * (userInput.Right - userInput.Left)));
-	_yPos = std::min(_screenHeight - _height, std::max(0, _yPos + speed * (userInput.Down - userInput.Up)));
+//	_worldX = std::min(_screenWidth - _width, std::max(0, _worldX + speed * (userInput.Right - userInput.Left)));
+//	_worldY = std::min(_screenHeight - _height, std::max(0, _worldY + speed * (userInput.Down - userInput.Up)));
+	_worldX = _worldX + speed * (userInput.Right - userInput.Left);
+	_worldY = _worldY + speed * (userInput.Down - userInput.Up);
 }
 
 std::pair<int, int> Player::GetPosition() const
 {
-	return std::pair<int, int>(_xPos, _yPos);
+	return std::pair<int, int>(_worldX, _worldY);
 }

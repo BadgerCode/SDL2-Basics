@@ -1,6 +1,7 @@
 #pragma once
 
 #include "SDL2/SDL.h"
+#include "SDL2/SDL_ttf.h"
 #include "RenderableSDLTexture.h"
 #include <vector>
 #include "TextureController.h"
@@ -17,6 +18,7 @@ public:
 	void PreloadBackground();
 
 	void RenderTexture(RenderableSDLTexture* texture, int x, int y) const;
+	void RenderText(TTF_Font* font, const char* text, SDL_Color color, int x, int y) const;
 
 	void DrawRectangle(SDL_Rect* rect, int r, int g, int b, int a) const;
 	void DrawRectangleOutline(SDL_Rect* rect, int r, int g, int b, int a) const;

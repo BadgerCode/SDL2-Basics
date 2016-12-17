@@ -1,5 +1,6 @@
 #pragma once
 
+#include "SDL2/SDL_ttf.h"
 #include "KeyboardController.h"
 #include "RenderController.h"
 #include "RenderableSDLTexture.h"
@@ -29,9 +30,11 @@ private:
 
 	int _width;
 	int _height;
-	int _xPos;
-	int _yPos;
+	int _worldX;
+	int _worldY;
 	int _screenWidth;
 	int _screenHeight;
+
+	TTF_Font* _playerFont;
 };
 

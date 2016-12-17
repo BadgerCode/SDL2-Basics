@@ -31,6 +31,12 @@
     <Filter Include="Header Files\Models">
       <UniqueIdentifier>{d70f806b-eb01-46bb-ae8b-1385d224b2ae}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Entities">
+      <UniqueIdentifier>{101bbb6b-db17-48b1-bff4-b2f520334535}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Entities">
+      <UniqueIdentifier>{e1328a5f-0add-47ea-b6e5-abafcbc75b1a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameEngine.cpp">
@@ -57,12 +63,6 @@
     <ClCompile Include="TextureController.cpp">
       <Filter>Source Files\Controllers</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>Source Files\Models</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Source Files\Models</Filter>
-    </ClCompile>
     <ClCompile Include="RenderableSDLTexture.cpp">
       <Filter>Source Files\Models</Filter>
     </ClCompile>
@@ -74,6 +74,12 @@
     </ClCompile>
     <ClCompile Include="TimeController.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Source Files\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files\Entities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -101,16 +107,7 @@
     <ClInclude Include="TextureController.h">
       <Filter>Header Files\Controllers</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>Header Files\Models</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Header Files\Models</Filter>
-    </ClInclude>
     <ClInclude Include="RenderableSDLTexture.h">
-      <Filter>Header Files\Models</Filter>
-    </ClInclude>
-    <ClInclude Include="Entity.h">
       <Filter>Header Files\Models</Filter>
     </ClInclude>
     <ClInclude Include="LightingController.h">
@@ -118,6 +115,15 @@
     </ClInclude>
     <ClInclude Include="TimeController.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Header Files\Entities</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
