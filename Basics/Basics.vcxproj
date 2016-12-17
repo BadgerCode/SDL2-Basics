@@ -138,6 +138,7 @@ xcopy /e /i /h "$(ProjectDir)resources" "$(OutDir)resources"</Command>
     <ClCompile Include="GameEngineFactory.cpp" />
     <ClCompile Include="KeyboardController.cpp" />
     <ClCompile Include="LightingController.cpp" />
+    <ClCompile Include="LightSource.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="RenderController.cpp" />
@@ -158,6 +159,7 @@ xcopy /e /i /h "$(ProjectDir)resources" "$(OutDir)resources"</Command>
     <ClInclude Include="GameEngineFactory.h" />
     <ClInclude Include="KeyboardController.h" />
     <ClInclude Include="LightingController.h" />
+    <ClInclude Include="LightSource.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="RenderController.h" />
     <ClInclude Include="RenderableSDLTexture.h" />

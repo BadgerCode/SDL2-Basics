@@ -4,30 +4,37 @@
 
 
 LightingController::LightingController(SDL_Renderer* sdlRenderer, RenderController* renderController, 
-										EntityController* entityController, TextureController* textureController, 
-										TimeController* timeController, int screenWidth, int screenheight)
+										TextureController* textureController, TimeController* timeController, 
+										int screenWidth, int screenheight)
 {
 	_sdlRenderer = sdlRenderer;
 	_renderController = renderController;
-	_entityController = entityController;
 	_textureController = textureController;
 	_timeController = timeController;
 	_screenWidth = screenWidth;
 	_screenHeight = screenheight;
 
-	_playerLight = _textureController->GetTexture("resources/playerlight.png");
-	SDL_SetTextureBlendMode(_playerLight->RawTexture, SDL_BLENDMODE_BLEND);
-
 	_testLightTexture = _textureController->GetTexture("resources/lightsource.png");
 	SDL_SetTextureBlendMode(_testLightTexture->RawTexture, SDL_BLENDMODE_BLEND);
 
 	_startOfDay = clock();
+
+	// Test light sources
+	AddLightSource(new LightSource(_testLightTexture, 100, 100));
+	AddLightSource(new LightSource(_testLightTexture, 300, 200));
+	AddLightSource(new LightSource(_testLightTexture, 1000, 400));
+	AddLightSource(new LightSource(_testLightTexture, 170, 700));
+	AddLightSource(new LightSource(_testLightTexture, 650, 600));
 }
 
 LightingController::~LightingController()
 {
-	delete _playerLight;
 	delete _testLightTexture;
+}
+
+void LightingController::AddLightSource(LightSource* lightSource)
+{
+	_lightSources.push_back(lightSource);
 }
 
 void LightingController::RenderLighting() const
@@ -80,12 +87,9 @@ void LightingController::RenderLightMap(int brightness) const
 
 void LightingController::RenderLightSources() const
 {
-//	auto playerPos = _entityController->GetPlayerPosition();
-//	_renderController->RenderScreenTexture(_playerLight, playerPos.first - (_playerLight->TextureRect->w / 2), playerPos.second - (_playerLight->TextureRect->h / 2));
-
-	_renderController->RenderWorldTexture(_testLightTexture, 100, 100);
-	_renderController->RenderWorldTexture(_testLightTexture, 300, 200);
-	_renderController->RenderWorldTexture(_testLightTexture, 1000, 400);
-	_renderController->RenderWorldTexture(_testLightTexture, 170, 700);
-	_renderController->RenderWorldTexture(_testLightTexture, 650, 600);
+	for (auto lightSource : _lightSources)
+	{
+		auto worldPos = lightSource->GetWorldPosition();
+		_renderController->RenderWorldTexture(lightSource->Texture, worldPos.first, worldPos.second);
+	}
 }

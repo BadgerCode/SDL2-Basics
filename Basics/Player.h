@@ -5,6 +5,7 @@
 #include "RenderController.h"
 #include "RenderableSDLTexture.h"
 #include "Entity.h"
+#include "LightSource.h"
 
 struct PlayerMovement
 {
@@ -17,7 +18,9 @@ struct PlayerMovement
 class Player : public Entity
 {
 public:
-	Player(RenderController* renderController, KeyboardController* keyboardController, RenderableSDLTexture* playerTexture, int startX, int startY, int screenWidth, int screenHeight);
+	Player(RenderController* renderController, KeyboardController* keyboardController, 
+			RenderableSDLTexture* playerTexture, LightSource* playerLight,
+			int startX, int startY, int screenWidth, int screenHeight);
 	~Player();
 
 	void Render() const override;
@@ -28,6 +31,7 @@ private:
 	KeyboardController* _keyboardController;
 
 	RenderableSDLTexture* _playerTexture;
+	LightSource* _playerLight;
 
 	int _width;
 	int _height;
