@@ -7,11 +7,13 @@
 class Enemy : public Entity
 {
 public:
-	Enemy(RenderController* renderController, EntityController* entityController, RenderableSDLTexture* enemyTexture, int startX, int startY, int screenWidth, int screenHeight);
+	Enemy(RenderController* renderController, RenderableSDLTexture* enemyTexture, 
+		int startX, int startY, int screenWidth, int screenHeight);
 	~Enemy();
 	void Render() const override;
 	void Update() override;
 	std::pair<int, int> GetPosition() const override;
+	std::pair<int, int> GetSize() const override;
 private:
 	RenderController* _renderController;
 	RenderableSDLTexture* _enemyTexture;

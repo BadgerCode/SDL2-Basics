@@ -6,7 +6,8 @@ GameEngine::GameEngine(RenderController* renderController,
 						KeyboardController* keyboardController, 
 						TextureController* textureController, 
 						EntityController* entityController,
-						TimeController* timeController)
+						TimeController* timeController,
+						TileController* tileController)
 {
 	_renderController = renderController;
 	_lightingController = lightingController;
@@ -14,6 +15,7 @@ GameEngine::GameEngine(RenderController* renderController,
 	_textureController = textureController;
 	_entityController = entityController;
 	_timeController = timeController;
+	_tileController = tileController;
 
 	_gameState = GameState::PLAY;
 }
@@ -40,7 +42,7 @@ void GameEngine::LoadTextures() const
 	_textureController->PreloadTexture("resources/player.png");
 	_textureController->PreloadTexture("resources/playerlight.png");
 	_textureController->PreloadTexture("resources/skeleton.png");
-	_renderController->PreloadBackground();
+//	_renderController->PreloadBackground();
 }
 
 void GameEngine::CreateEntities() const
@@ -62,11 +64,11 @@ void GameEngine::GameLoop()
 		_entityController->UpdateAll();
 		
 		_renderController->ClearScreen();
-		_renderController->DrawBackground();
+		_tileController->Render();
 
 		_entityController->RenderAll();
 
-//		_lightingController->RenderLighting();
+		_lightingController->RenderLighting();
 		_renderController->UpdateScreen();
 
 		SDL_Delay(16); // Gives us 60 FPS. Doesn't take into account how long this "frame" took to process.

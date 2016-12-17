@@ -75,17 +75,17 @@ void LightingController::RenderLightMap(int brightness) const
 	rect.x = 0;
 	rect.y = 0;
 
-	_renderController->DrawRectangle(&rect, brightness, brightness, brightness, 255);
+	_renderController->DrawScreenRectangle(&rect, brightness, brightness, brightness, 255);
 }
 
 void LightingController::RenderLightSources() const
 {
-	auto playerPos = _entityController->GetPlayerPosition();
-	_renderController->RenderTexture(_playerLight, playerPos.first - (_playerLight->TextureRect->w / 2), playerPos.second - (_playerLight->TextureRect->h / 2));
+//	auto playerPos = _entityController->GetPlayerPosition();
+//	_renderController->RenderScreenTexture(_playerLight, playerPos.first - (_playerLight->TextureRect->w / 2), playerPos.second - (_playerLight->TextureRect->h / 2));
 
-	_renderController->RenderTexture(_testLightTexture, 100, 100);
-	_renderController->RenderTexture(_testLightTexture, 300, 200);
-	_renderController->RenderTexture(_testLightTexture, 1000, 400);
-	_renderController->RenderTexture(_testLightTexture, 170, 700);
-	_renderController->RenderTexture(_testLightTexture, 650, 600);
+	_renderController->RenderWorldTexture(_testLightTexture, 100, 100);
+	_renderController->RenderWorldTexture(_testLightTexture, 300, 200);
+	_renderController->RenderWorldTexture(_testLightTexture, 1000, 400);
+	_renderController->RenderWorldTexture(_testLightTexture, 170, 700);
+	_renderController->RenderWorldTexture(_testLightTexture, 650, 600);
 }

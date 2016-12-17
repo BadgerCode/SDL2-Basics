@@ -4,8 +4,8 @@
 #include <algorithm>
 
 
-Enemy::Enemy(RenderController* renderController, EntityController* entityController, 
-			RenderableSDLTexture* enemyTexture, int startX, int startY, int screenWidth, int screenHeight): Entity(entityController)
+Enemy::Enemy(RenderController* renderController, RenderableSDLTexture* enemyTexture, 
+			int startX, int startY, int screenWidth, int screenHeight): Entity()
 {
 	_renderController = renderController;
 	_enemyTexture = enemyTexture;
@@ -25,7 +25,7 @@ Enemy::~Enemy()
 
 void Enemy::Render() const
 {
-	_renderController->RenderTexture(_enemyTexture, _xPos, _yPos);
+	_renderController->RenderWorldTexture(_enemyTexture, _xPos, _yPos);
 }
 
 void Enemy::Update()
@@ -77,6 +77,11 @@ void Enemy::Update()
 std::pair<int, int> Enemy::GetPosition() const
 {
 	return std::pair<int, int>(_xPos, _yPos);
+}
+
+std::pair<int, int> Enemy::GetSize() const
+{
+	return std::pair<int, int>(_enemyTexture->TextureRect->w, _enemyTexture->TextureRect->h);
 }
 
 clock_t Enemy::GetNewMovementTime()

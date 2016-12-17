@@ -4,6 +4,7 @@
 #include "KeyboardController.h"
 #include "RenderController.h"
 #include "RenderableSDLTexture.h"
+#include "Entity.h"
 
 struct PlayerMovement
 {
@@ -13,15 +14,16 @@ struct PlayerMovement
 	bool Right;
 };
 
-class Player
+class Player : public Entity
 {
 public:
 	Player(RenderController* renderController, KeyboardController* keyboardController, RenderableSDLTexture* playerTexture, int startX, int startY, int screenWidth, int screenHeight);
 	~Player();
 
-	void Render() const;
-	void Update();
-	std::pair<int, int> GetPosition() const;
+	void Render() const override;
+	void Update() override;
+	std::pair<int, int> GetPosition() const override;
+	std::pair<int, int> GetSize() const override;
 private:
 	RenderController* _renderController;
 	KeyboardController* _keyboardController;
@@ -32,8 +34,8 @@ private:
 	int _height;
 	int _worldX;
 	int _worldY;
-	int _screenWidth;
-	int _screenHeight;
+	int _screenX;
+	int _screenY;
 
 	TTF_Font* _playerFont;
 };

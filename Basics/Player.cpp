@@ -3,19 +3,20 @@
 
 Player::Player(RenderController* renderController, KeyboardController* keyboardController, 
 				RenderableSDLTexture* playerTexture, int startX, int startY, int screenWidth, 
-				int screenHeight)
+				int screenHeight): Entity()
 {
 	_renderController = renderController;
 	_keyboardController = keyboardController;
 
 	_worldX = startX;
 	_worldY = startY;
-	_screenWidth = screenWidth;
-	_screenHeight = screenHeight;
 
 	_playerTexture = playerTexture;
 	_width = _playerTexture->TextureRect->w;
 	_height = _playerTexture->TextureRect->h;
+
+	_screenX = screenWidth / 2;
+	_screenY = screenHeight / 2;
 
 	_playerFont = TTF_OpenFont("resources/arial.ttf", 50);
 }
@@ -27,12 +28,12 @@ Player::~Player()
 
 void Player::Render() const
 {
-	_renderController->RenderTexture(_playerTexture, _screenWidth / 2 - _height / 2, _screenHeight / 2 - _width / 2);
+	_renderController->RenderScreenTexture(_playerTexture, _screenX - _height / 2, _screenY - _width / 2);
 
 	char buffer[100];
 	sprintf_s(buffer, "(%d, %d)", _worldX, _worldY);
 	SDL_Color fontColor = { 0, 0, 0, 255 };
-	_renderController->RenderText(_playerFont, buffer, fontColor, 200, 200);
+	_renderController->RenderScreenText(_playerFont, buffer, fontColor, 200, 200);
 }
 
 void Player::Update()
@@ -50,4 +51,9 @@ void Player::Update()
 std::pair<int, int> Player::GetPosition() const
 {
 	return std::pair<int, int>(_worldX, _worldY);
+}
+
+std::pair<int, int> Player::GetSize() const
+{
+	return std::pair<int, int>(_width, _height);
 }
