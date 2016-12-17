@@ -13,7 +13,6 @@ public:
 						EntityController* entityController, TextureController* textureController, 
 						TimeController* timeController, int screenWidth, int screenheight);
 	~LightingController();
-
 	void RenderLighting() const;
 
 private:
@@ -30,5 +29,8 @@ private:
 
 	clock_t _startOfDay;
 	int GetDayBrightness() const;
+
+	void RenderLightMap(int brightness) const;
+	void RenderLightSources() const;
 };
 

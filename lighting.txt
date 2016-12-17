@@ -1,0 +1,59 @@
+dstA = srcA + (dstA * (1-srcA))
+
+dstA	srcA	dstA'
+0		0		0
+1		0		1
+0		1		1
+1		1		1
+
+
+Draw light sources onto darkness
+Draw light/darkness onto sprites/everything else
+
+
+Draw light on darkness
+===
+Darkness pixel: (0, 0, 0, 255)
+Lightness pixel: (255, 255, 100, 255)
+Expected output: (255, 255, 100, 255)
+
+Blendmode blend
+dstRGB = (srcRGB * srcA) + (dstRGB * (1-srcA))
+		= ([1, 1, 0.5] * 1) + ([0, 0, 0] * (1-1))
+		= [1,1,0.5]
+dstA = srcA + (dstA * (1-srcA))
+		= 1
+
+
+		
+Sprite pixel: (0, 255, 0, 255)
+Darkness pixel: (0, 0, 0, 255)
+Lightness pixel: (255, 255, 100, 255)
+Expected output: ()
+
+
+
+Draw light/dark onto everything else (light source situation)
+===
+light/dark: (255, 255, 100, 255)
+background: (0, 255, 0, 255)
+
+Blendmode mod
+dstRGB = srcRGB * dstRGB
+		= [1, 1, 0.5, 1] * [0, 1, 0, 1]
+		= [0, 1, 0, 1]
+dstA = dstA
+	= 1
+
+	
+Draw light/dark onto everything else (darkness situation)
+===
+light/dark: (0, 0, 0, 255)
+background: (0, 255, 0, 255)
+
+Blendmode mod
+dstRGB = srcRGB * dstRGB
+		= [0, 0, 0, 1] * [0, 1, 0, 1]
+		= [0, 0, 0, 1]
+dstA = dstA
+	= 1

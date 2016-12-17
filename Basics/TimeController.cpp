@@ -4,7 +4,7 @@
 
 TimeController::TimeController()
 {
-	_startOfDay = clock(); // TODO: Start at dawn
+	_startOfDay = clock() - (SecondsPerNight / 2) * CLOCKS_PER_SEC;
 	_secondsSinceDayStart = 0;
 	_timeOfDay = GetCurrentTimeOfDay();
 }

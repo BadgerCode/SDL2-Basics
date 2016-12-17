@@ -32,45 +32,15 @@ LightingController::~LightingController()
 
 void LightingController::RenderLighting() const
 {
-	// Create a darkness texture
-		// Full size of screen
-		// Every pixel is black with full opacity (no transparency)
-			// Increase the transparency to brighten the world
-	// Use a light source image
-		// Image colour is yellow
-			// Colour of light source
-		// Image uses transparency to show light
-			// Lightest point is most transparent
-			// Darkest point is least transparent
-			// So middle is almost transparent, outside is fully opague
-			// Middle shouldn't be fully transparent if you want the light source to have a colour
-	// Render light source image on darkness texture
-		// Additive blend mode
-	// Render darkness texture
-		// Multiply blend mode
-
 	auto lightingTexture = SDL_CreateTexture(_sdlRenderer, SDL_PIXELFORMAT_RGBA8888, 
 											SDL_TEXTUREACCESS_TARGET, _screenWidth, _screenHeight);
 	SDL_SetRenderTarget(_sdlRenderer, lightingTexture);
 
-	SDL_Rect rect;
-	rect.w = _screenWidth;
-	rect.h = _screenHeight;
-	rect.x = 0;
-	rect.y = 0;
-
 	auto brightness = GetDayBrightness();
-	_renderController->DrawRectangle(&rect, brightness, brightness, brightness, 255);
+	RenderLightMap(brightness);
 
 	if (brightness < 230) {
-		auto playerPos = _entityController->GetPlayerPosition();
-		_renderController->RenderTexture(_playerLight, playerPos.first - (_playerLight->TextureRect->w / 2), playerPos.second - (_playerLight->TextureRect->h / 2));
-
-		_renderController->RenderTexture(_testLightTexture, 100, 100);
-		_renderController->RenderTexture(_testLightTexture, 300, 200);
-		_renderController->RenderTexture(_testLightTexture, 1000, 400);
-		_renderController->RenderTexture(_testLightTexture, 170, 700);
-		_renderController->RenderTexture(_testLightTexture, 650, 600);
+		RenderLightSources();
 	}
 
 	SDL_SetRenderTarget(_sdlRenderer, nullptr);
@@ -95,4 +65,27 @@ int LightingController::GetDayBrightness() const
 	default:
 		return 255;
 	}
+}
+
+void LightingController::RenderLightMap(int brightness) const
+{
+	SDL_Rect rect;
+	rect.w = _screenWidth;
+	rect.h = _screenHeight;
+	rect.x = 0;
+	rect.y = 0;
+
+	_renderController->DrawRectangle(&rect, brightness, brightness, brightness, 255);
+}
+
+void LightingController::RenderLightSources() const
+{
+	auto playerPos = _entityController->GetPlayerPosition();
+	_renderController->RenderTexture(_playerLight, playerPos.first - (_playerLight->TextureRect->w / 2), playerPos.second - (_playerLight->TextureRect->h / 2));
+
+	_renderController->RenderTexture(_testLightTexture, 100, 100);
+	_renderController->RenderTexture(_testLightTexture, 300, 200);
+	_renderController->RenderTexture(_testLightTexture, 1000, 400);
+	_renderController->RenderTexture(_testLightTexture, 170, 700);
+	_renderController->RenderTexture(_testLightTexture, 650, 600);
 }
