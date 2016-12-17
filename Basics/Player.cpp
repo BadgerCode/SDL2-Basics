@@ -29,11 +29,6 @@ Player::~Player()
 void Player::Render() const
 {
 	_renderController->RenderScreenTexture(_playerTexture, _screenX - _height / 2, _screenY - _width / 2);
-
-	char buffer[100];
-	sprintf_s(buffer, "(%d, %d)", _worldX, _worldY);
-	SDL_Color fontColor = { 0, 0, 0, 255 };
-	_renderController->RenderScreenText(_playerFont, buffer, fontColor, 200, 200);
 }
 
 void Player::Update()
@@ -51,9 +46,4 @@ void Player::Update()
 std::pair<int, int> Player::GetPosition() const
 {
 	return std::pair<int, int>(_worldX, _worldY);
-}
-
-std::pair<int, int> Player::GetSize() const
-{
-	return std::pair<int, int>(_width, _height);
 }

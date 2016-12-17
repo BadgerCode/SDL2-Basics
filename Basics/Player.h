@@ -23,7 +23,6 @@ public:
 	void Render() const override;
 	void Update() override;
 	std::pair<int, int> GetPosition() const override;
-	std::pair<int, int> GetSize() const override;
 private:
 	RenderController* _renderController;
 	KeyboardController* _keyboardController;

@@ -42,7 +42,6 @@ void GameEngine::LoadTextures() const
 	_textureController->PreloadTexture("resources/player.png");
 	_textureController->PreloadTexture("resources/playerlight.png");
 	_textureController->PreloadTexture("resources/skeleton.png");
-//	_renderController->PreloadBackground();
 }
 
 void GameEngine::CreateEntities() const

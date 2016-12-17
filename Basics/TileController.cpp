@@ -6,8 +6,8 @@ TileController::TileController(TextureController* textureController, RenderContr
 {
 	_renderController = renderController;
 
-	auto tilesWidth = ceil(static_cast<double>(worldWidth) / TileWidth);
-	auto tilesHeight = ceil(static_cast<double>(worldHeight) / TileHeight);
+	auto tilesWidth = static_cast<int>(ceil(static_cast<double>(worldWidth) / TileWidth));
+	auto tilesHeight = static_cast<int>(ceil(static_cast<double>(worldHeight) / TileHeight));
 
 	for(auto y = 0; y < tilesHeight; y++)
 	{
@@ -26,9 +26,9 @@ TileController::~TileController()
 
 void TileController::Render() const
 {
-	for(auto i = 0; i < _tiles.size(); i++)
+	for(size_t i = 0; i < _tiles.size(); i++)
 	{
-		for(auto j = 0; j < _tiles[i].size(); j++)
+		for(size_t j = 0; j < _tiles[i].size(); j++)
 		{
 			if(_tiles[i][j] != nullptr)
 			{
