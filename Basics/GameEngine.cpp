@@ -22,6 +22,8 @@ GameEngine::GameEngine(RenderController* renderController,
 
 	auto fps = 60;
 	_secondsPerFrame = floor(1000 / fps);
+
+	_testLightTexture = nullptr;
 }
 
 GameEngine::~GameEngine()
@@ -30,12 +32,14 @@ GameEngine::~GameEngine()
 	delete _textureController;
 	delete _entityController;
 	delete _keyboardController;
+	delete _testLightTexture;
 }
 
 void GameEngine::Start()
 {
 	LoadTextures();
 	CreateEntities();
+	AddLightSources();
 	GameLoop();
 }
 
@@ -54,6 +58,18 @@ void GameEngine::CreateEntities() const
 	_entityController->AddEnemy(120, 200);
 	_entityController->AddEnemy(900, 300);
 	_entityController->AddEnemy(250, 500);
+}
+
+void GameEngine::AddLightSources()
+{
+	_testLightTexture = _textureController->GetTexture("resources/lightsource.png");
+	SDL_SetTextureBlendMode(_testLightTexture->RawTexture, SDL_BLENDMODE_BLEND);
+
+	_lightingController->AddLightSource(new LightSource(_testLightTexture, 100, 100));
+	_lightingController->AddLightSource(new LightSource(_testLightTexture, 300, 200));
+	_lightingController->AddLightSource(new LightSource(_testLightTexture, 1000, 400));
+	_lightingController->AddLightSource(new LightSource(_testLightTexture, 170, 700));
+	_lightingController->AddLightSource(new LightSource(_testLightTexture, 650, 600));
 }
 
 void GameEngine::GameLoop()

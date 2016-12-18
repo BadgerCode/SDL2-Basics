@@ -37,7 +37,7 @@ GameEngine* GameEngineFactory::Create(SDL_Renderer* sdlRenderer, int screenWidth
 												textureController, screenWidth, 
 												screenHeight, player);
 
-	auto lightingController = new LightingController(sdlRenderer, renderController, textureController, timeController, screenWidth, screenHeight);
+	auto lightingController = new LightingController(sdlRenderer, renderController, timeController, screenWidth, screenHeight);
 	lightingController->AddLightSource(playerLightSource);
 
 	auto tileController = new TileController(worldPositionController, textureController, renderController, 2000, 2000);

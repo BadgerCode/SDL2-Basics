@@ -4,32 +4,19 @@
 
 
 LightingController::LightingController(SDL_Renderer* sdlRenderer, RenderController* renderController, 
-										TextureController* textureController, TimeController* timeController, 
-										int screenWidth, int screenheight)
+										TimeController* timeController, int screenWidth, int screenheight)
 {
 	_sdlRenderer = sdlRenderer;
 	_renderController = renderController;
-	_textureController = textureController;
 	_timeController = timeController;
 	_screenWidth = screenWidth;
 	_screenHeight = screenheight;
 
-	_testLightTexture = _textureController->GetTexture("resources/lightsource.png");
-	SDL_SetTextureBlendMode(_testLightTexture->RawTexture, SDL_BLENDMODE_BLEND);
-
 	_startOfDay = clock();
-
-	// Test light sources
-	AddLightSource(new LightSource(_testLightTexture, 100, 100));
-	AddLightSource(new LightSource(_testLightTexture, 300, 200));
-	AddLightSource(new LightSource(_testLightTexture, 1000, 400));
-	AddLightSource(new LightSource(_testLightTexture, 170, 700));
-	AddLightSource(new LightSource(_testLightTexture, 650, 600));
 }
 
 LightingController::~LightingController()
 {
-	delete _testLightTexture;
 }
 
 void LightingController::AddLightSource(LightSource* lightSource)

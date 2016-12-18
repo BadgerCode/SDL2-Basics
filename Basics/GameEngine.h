@@ -37,8 +37,11 @@ private :
 	GameState _gameState;
 	double _secondsPerFrame;
 
+	RenderableSDLTexture* _testLightTexture;
+
 	void LoadTextures() const;
 	void CreateEntities() const;
+	void AddLightSources();
 	void GameLoop();
 	void ProcessInput();
 };
