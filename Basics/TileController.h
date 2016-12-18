@@ -4,11 +4,15 @@
 class TileController
 {
 public:
-	TileController(TextureController* textureController, RenderController* renderController, int worldWidth, int worldHeight);
+	TileController(WorldPositionController* worldPositionController, 
+					TextureController* textureController, 
+					RenderController* renderController, 
+					int worldWidth, int worldHeight);
 	~TileController();
 
 	void Render() const;
 private:
+	WorldPositionController* _worldPositionController;
 	RenderController* _renderController;
 
 	std::vector<std::vector<Tile*>> _tiles;

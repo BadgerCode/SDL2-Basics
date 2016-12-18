@@ -16,7 +16,7 @@ GameEngine* GameEngineFactory::Create(SDL_Renderer* sdlRenderer, int screenWidth
 {
 	auto textureController = new TextureController(sdlRenderer);
 	auto keyboardController = new KeyboardController();
-	auto worldPositionController = new WorldPositionController();
+	auto worldPositionController = new WorldPositionController(screenWidth, screenHeight);
 	auto timeController = new TimeController();
 
 	auto renderController = new RenderController(sdlRenderer, textureController, worldPositionController, screenWidth, screenHeight);
@@ -40,7 +40,7 @@ GameEngine* GameEngineFactory::Create(SDL_Renderer* sdlRenderer, int screenWidth
 	auto lightingController = new LightingController(sdlRenderer, renderController, textureController, timeController, screenWidth, screenHeight);
 	lightingController->AddLightSource(playerLightSource);
 
-	auto tileController = new TileController(textureController, renderController, 2000, 2000);
+	auto tileController = new TileController(worldPositionController, textureController, renderController, 2000, 2000);
 
 	return new GameEngine(renderController, lightingController, keyboardController,
 							textureController, entityController, timeController, tileController);

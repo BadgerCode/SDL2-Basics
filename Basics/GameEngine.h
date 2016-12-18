@@ -35,6 +35,7 @@ private :
 	TileController* _tileController;
 
 	GameState _gameState;
+	double _secondsPerFrame;
 
 	void LoadTextures() const;
 	void CreateEntities() const;

@@ -1,4 +1,5 @@
 #include "GameEngine.h"
+#include <chrono>
 
 
 GameEngine::GameEngine(RenderController* renderController, 
@@ -18,6 +19,9 @@ GameEngine::GameEngine(RenderController* renderController,
 	_tileController = tileController;
 
 	_gameState = GameState::PLAY;
+
+	auto fps = 60;
+	_secondsPerFrame = floor(1000 / fps);
 }
 
 GameEngine::~GameEngine()
@@ -56,6 +60,7 @@ void GameEngine::GameLoop()
 {
 	while(_gameState != GameState::EXIT)
 	{
+		auto startTime = std::chrono::high_resolution_clock::now();
 		_timeController->Update();
 
 		ProcessInput();
@@ -70,7 +75,9 @@ void GameEngine::GameLoop()
 		_lightingController->RenderLighting();
 		_renderController->UpdateScreen();
 
-		SDL_Delay(16); // Gives us 60 FPS. Doesn't take into account how long this "frame" took to process.
+		auto duration = std::chrono::duration<double>(std::chrono::high_resolution_clock::now() - startTime).count() * 1000;
+		printf("Frame duration: %fms\n", ceil(duration));
+		SDL_Delay(std::max(static_cast<double>(0), _secondsPerFrame - duration));
 	}
 }
 
