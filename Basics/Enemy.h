@@ -8,7 +8,7 @@ class Enemy : public Entity
 {
 public:
 	Enemy(RenderController* renderController, RenderableSDLTexture* enemyTexture, 
-		int startX, int startY, int screenWidth, int screenHeight);
+		int startX, int startY);
 	~Enemy();
 	void Render() const override;
 	void Update() override;
@@ -18,8 +18,6 @@ private:
 	RenderableSDLTexture* _enemyTexture;
 	int _xPos;
 	int _yPos;
-	int _screenWidth;
-	int _screenHeight;
 
 	clock_t _nextMovementTime;
 	int _targetXPos;

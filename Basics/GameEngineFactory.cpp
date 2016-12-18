@@ -2,6 +2,7 @@
 #include "TimeController.h"
 #include "TileController.h"
 #include "WorldPositionController.h"
+#include "Player.h"
 
 
 GameEngineFactory::GameEngineFactory()
@@ -33,9 +34,8 @@ GameEngine* GameEngineFactory::Create(SDL_Renderer* sdlRenderer, int screenWidth
 
 	worldPositionController->SetTargetEntity(player, screenWidth / 2, screenHeight / 2);
 
-	auto entityController = new EntityController(renderController, keyboardController, 
-												textureController, screenWidth, 
-												screenHeight, player);
+	auto entityController = new EntityController(renderController);
+	entityController->AddEntity(player);
 
 	auto lightingController = new LightingController(sdlRenderer, renderController, timeController, screenWidth, screenHeight);
 	lightingController->AddLightSource(playerLightSource);

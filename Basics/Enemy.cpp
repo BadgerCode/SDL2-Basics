@@ -4,14 +4,12 @@
 
 
 Enemy::Enemy(RenderController* renderController, RenderableSDLTexture* enemyTexture, 
-			int startX, int startY, int screenWidth, int screenHeight): Entity()
+			int startX, int startY): Entity()
 {
 	_renderController = renderController;
 	_enemyTexture = enemyTexture;
 	_xPos = startX;
 	_yPos = startY;
-	_screenWidth = screenWidth;
-	_screenHeight = screenHeight;
 
 	_targetXPos = _xPos;
 	_targetYPos = _yPos;

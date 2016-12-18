@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
-#include "TextureController.h"
-#include "Player.h"
+#include "RenderController.h"
+#include "Entity.h"
 #include <queue>
 
 class Entity;
@@ -9,24 +9,17 @@ class Entity;
 class EntityController
 {
 public:
-	EntityController(RenderController* renderController, KeyboardController* keyboardController, 
-					 TextureController* textureController, int screenWidth, int screenHeight,
-					 Player* player);
+	EntityController(RenderController* renderController);
 	~EntityController();
 
-	void AddEnemy(int spawnX, int spawnY);
+	void AddEntity(Entity* entity);
 	void UpdateAll();
 	void RenderAll() const;
 	std::vector<Entity*> FindInRange(int x, int y, int radius);
 private:
 	RenderController* _renderController;
-	TextureController* _textureController;
-	KeyboardController* _keyboardController;
 
-	Player* _player;
 	std::vector<Entity*> _entities;
 	std::queue<Entity*> _newEntities;
-	int _screenWidth;
-	int _screenHeight;
 };
 

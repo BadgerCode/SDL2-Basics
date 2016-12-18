@@ -1,35 +1,23 @@
 #include "EntityController.h"
-#include "Enemy.h"
-#include "Entity.h"
 
 
-EntityController::EntityController(RenderController* renderController, KeyboardController* keyboardController, 
-									TextureController* textureController, int screenWidth, int screenHeight,
-									Player* player)
+EntityController::EntityController(RenderController* renderController)
 {
 	_renderController = renderController;
-	_textureController = textureController;
-	_keyboardController = keyboardController;
-	_screenWidth = screenWidth;
-	_screenHeight = screenHeight;
-
-	_player = player;
 }
 
 EntityController::~EntityController()
 {
-	delete _player;
 	for (auto entity : _entities) { delete entity; }
 }
 
-void EntityController::AddEnemy(int spawnX, int spawnY)
+void EntityController::AddEntity(Entity* entity)
 {
-	_newEntities.push(new Enemy(_renderController, _textureController->GetTexture("resources/skeleton.png"), spawnX, spawnY, _screenWidth, _screenHeight));
+	_newEntities.push(entity);
 }
 
 void EntityController::UpdateAll()
 {
-	_player->Update();
 	for (auto entity : _entities) { entity->Update(); }
 
 	while(!_newEntities.empty())
@@ -41,7 +29,6 @@ void EntityController::UpdateAll()
 
 void EntityController::RenderAll() const
 {
-	_player->Render();
 	for (auto entity : _entities) { entity->Render(); }
 }
 
