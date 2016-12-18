@@ -1,11 +1,12 @@
 #include "RenderController.h"
+#include <SDL2/SDL_ttf.h>
 
 
-
-RenderController::RenderController(SDL_Renderer* renderer, TextureController* textureController, int screenWidth, int screenHeight)
+RenderController::RenderController(SDL_Renderer* renderer, TextureController* textureController, WorldPositionController* worldPositionController, int screenWidth, int screenHeight)
 {
 	_sdlRenderer = renderer;
 	_textureController = textureController;
+	_worldPositionController = worldPositionController;
 
 	_screenWidth = screenWidth;
 	_screenHeight = screenHeight;
@@ -29,37 +30,26 @@ void RenderController::UpdateScreen() const
 	SDL_RenderPresent(_sdlRenderer);
 }
 
-void RenderController::PreloadBackground()
+void RenderController::RenderWorldTexture(RenderableSDLTexture* texture, int x, int y) const
 {
-	int tilesHeight = ceil(static_cast<double>(_screenHeight) / 100);
-	int tilesWidth = ceil(static_cast<double>(_screenWidth) / 100);
+	auto screenPos = _worldPositionController->GetScreenPosFromWorldPos(x, y);
+	auto screenX = screenPos.first - texture->TextureRect->w / 2;
+	auto screenY = screenPos.second - texture->TextureRect->h / 2;
 
-	for(auto r = 0; r < tilesHeight; r++)
+	if (screenX > _screenWidth || screenY > _screenHeight)
 	{
-		_backgroundTiles.push_back(std::vector<RenderableSDLTexture*>(tilesWidth));
-
-		for(auto c = 0; c < tilesWidth; c++)
-		{
-			_backgroundTiles[r][c] = _textureController->GetTexture("resources/grass.png");
-		}
+		return;
 	}
+
+	if(screenX + texture->TextureRect->w < 0 || screenY + texture->TextureRect->h < 0)
+	{
+		return;
+	}
+
+	RenderScreenTexture(texture, screenX, screenY);
 }
 
-void RenderController::DrawBackground() const
-{
-	int rows = _backgroundTiles.size();
-	int cols = _backgroundTiles[0].size();
-
-	for(auto r = 0; r < rows; r++)
-	{
-		for(auto c = 0; c < cols; c++)
-		{
-			RenderTexture(_backgroundTiles[r][c], c * 100, r * 100);
-		}
-	}
-}
-
-void RenderController::RenderTexture(RenderableSDLTexture* texture, int x, int y) const
+void RenderController::RenderScreenTexture(RenderableSDLTexture* texture, int x, int y) const
 {
 	texture->TextureRect->x = x;
 	texture->TextureRect->y = y;
@@ -67,13 +57,35 @@ void RenderController::RenderTexture(RenderableSDLTexture* texture, int x, int y
 	SDL_RenderCopy(_sdlRenderer, texture->RawTexture, nullptr, texture->TextureRect);
 }
 
-void RenderController::DrawRectangle(SDL_Rect* rect, int r, int g, int b, int a) const
+void RenderController::RenderScreenText(TTF_Font* font, const char* text, SDL_Color color, int x, int y) const
+{
+	// TODO: Do this properly
+	// Wrap fonts in a custom model: could use RenderableSDLTexture
+	// Create a font controller (same kind of idea as texture controller)
+	auto surface = TTF_RenderText_Solid(font, text, color);
+	auto texture = SDL_CreateTextureFromSurface(_sdlRenderer, surface);
+	SDL_FreeSurface(surface);
+
+	SDL_Rect textureRect;
+	SDL_QueryTexture(texture, nullptr, nullptr, &textureRect.w, &textureRect.h);
+
+	textureRect.x = x;
+	textureRect.y = y;
+
+	auto renderableTexture = new RenderableSDLTexture(texture, textureRect.w, textureRect.h);
+
+	RenderScreenTexture(renderableTexture, x, y);
+
+//	delete renderableTexture; // Make sure to do this when this is properly implemented
+}
+
+void RenderController::DrawScreenRectangle(SDL_Rect* rect, int r, int g, int b, int a) const
 {
 	SDL_SetRenderDrawColor(_sdlRenderer, r, g, b, a);
 	SDL_RenderFillRect(_sdlRenderer, rect);
 }
 
-void RenderController::DrawRectangleOutline(SDL_Rect* rect, int r, int g, int b, int a) const
+void RenderController::DrawScreenRectangleOutline(SDL_Rect* rect, int r, int g, int b, int a) const
 {
 	SDL_SetRenderDrawColor(_sdlRenderer, r, g, b, a);
 	SDL_RenderDrawRect(_sdlRenderer, rect);

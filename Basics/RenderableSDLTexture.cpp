@@ -12,4 +12,5 @@ RenderableSDLTexture::RenderableSDLTexture(SDL_Texture* texture, int width, int 
 
 RenderableSDLTexture::~RenderableSDLTexture()
 {
+	
 }

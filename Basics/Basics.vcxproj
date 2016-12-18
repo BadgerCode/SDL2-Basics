@@ -138,6 +138,7 @@ xcopy /e /i /h "$(ProjectDir)resources" "$(OutDir)resources"</Command>
     <ClCompile Include="GameEngineFactory.cpp" />
     <ClCompile Include="KeyboardController.cpp" />
     <ClCompile Include="LightingController.cpp" />
+    <ClCompile Include="LightSource.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="RenderController.cpp" />
@@ -145,7 +146,10 @@ xcopy /e /i /h "$(ProjectDir)resources" "$(OutDir)resources"</Command>
     <ClCompile Include="SDLRendererFactory.cpp" />
     <ClCompile Include="SDLWindowFactory.cpp" />
     <ClCompile Include="TextureController.cpp" />
+    <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="TileController.cpp" />
     <ClCompile Include="TimeController.cpp" />
+    <ClCompile Include="WorldPositionController.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Enemy.h" />
@@ -155,13 +159,17 @@ xcopy /e /i /h "$(ProjectDir)resources" "$(OutDir)resources"</Command>
     <ClInclude Include="GameEngineFactory.h" />
     <ClInclude Include="KeyboardController.h" />
     <ClInclude Include="LightingController.h" />
+    <ClInclude Include="LightSource.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="RenderController.h" />
     <ClInclude Include="RenderableSDLTexture.h" />
     <ClInclude Include="SDLRendererFactory.h" />
     <ClInclude Include="SDLWindowFactory.h" />
     <ClInclude Include="TextureController.h" />
+    <ClInclude Include="Tile.h" />
+    <ClInclude Include="TileController.h" />
     <ClInclude Include="TimeController.h" />
+    <ClInclude Include="WorldPositionController.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

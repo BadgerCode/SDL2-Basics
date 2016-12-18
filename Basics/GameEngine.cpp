@@ -1,4 +1,5 @@
 #include "GameEngine.h"
+#include <chrono>
 
 
 GameEngine::GameEngine(RenderController* renderController, 
@@ -6,7 +7,8 @@ GameEngine::GameEngine(RenderController* renderController,
 						KeyboardController* keyboardController, 
 						TextureController* textureController, 
 						EntityController* entityController,
-						TimeController* timeController)
+						TimeController* timeController,
+						TileController* tileController)
 {
 	_renderController = renderController;
 	_lightingController = lightingController;
@@ -14,8 +16,12 @@ GameEngine::GameEngine(RenderController* renderController,
 	_textureController = textureController;
 	_entityController = entityController;
 	_timeController = timeController;
+	_tileController = tileController;
 
 	_gameState = GameState::PLAY;
+
+	auto fps = 60;
+	_secondsPerFrame = floor(1000 / fps);
 }
 
 GameEngine::~GameEngine()
@@ -40,7 +46,6 @@ void GameEngine::LoadTextures() const
 	_textureController->PreloadTexture("resources/player.png");
 	_textureController->PreloadTexture("resources/playerlight.png");
 	_textureController->PreloadTexture("resources/skeleton.png");
-	_renderController->PreloadBackground();
 }
 
 void GameEngine::CreateEntities() const
@@ -55,6 +60,7 @@ void GameEngine::GameLoop()
 {
 	while(_gameState != GameState::EXIT)
 	{
+		auto startTime = std::chrono::high_resolution_clock::now();
 		_timeController->Update();
 
 		ProcessInput();
@@ -62,14 +68,16 @@ void GameEngine::GameLoop()
 		_entityController->UpdateAll();
 		
 		_renderController->ClearScreen();
-		_renderController->DrawBackground();
+		_tileController->Render();
 
 		_entityController->RenderAll();
 
 		_lightingController->RenderLighting();
 		_renderController->UpdateScreen();
 
-		SDL_Delay(16); // Gives us 60 FPS. Doesn't take into account how long this "frame" took to process.
+		auto duration = std::chrono::duration<double>(std::chrono::high_resolution_clock::now() - startTime).count() * 1000;
+		printf("Frame duration: %fms\n", ceil(duration));
+		SDL_Delay(std::max(static_cast<double>(0), _secondsPerFrame - duration));
 	}
 }
 

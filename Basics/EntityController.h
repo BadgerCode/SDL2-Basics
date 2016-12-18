@@ -10,14 +10,14 @@ class EntityController
 {
 public:
 	EntityController(RenderController* renderController, KeyboardController* keyboardController, 
-					 TextureController* textureController, int screenWidth, int screenHeight);
+					 TextureController* textureController, int screenWidth, int screenHeight,
+					 Player* player);
 	~EntityController();
 
 	void AddEnemy(int spawnX, int spawnY);
 	void UpdateAll();
-	void RenderAll();
+	void RenderAll() const;
 	std::vector<Entity*> FindInRange(int x, int y, int radius);
-	std::pair<int, int> GetPlayerPosition() const;
 private:
 	RenderController* _renderController;
 	TextureController* _textureController;

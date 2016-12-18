@@ -12,6 +12,5 @@ public:
 	virtual void Render() const = 0;
 	virtual std::pair<int, int> GetPosition() const = 0;
 protected:
-	Entity(EntityController* entityController): _entityController(entityController){ }
-	EntityController* _entityController;
+	Entity() { }
 };

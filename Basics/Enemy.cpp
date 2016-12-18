@@ -1,11 +1,10 @@
 #include "Enemy.h"
 #include "EntityController.h"
 #include <cstdlib>
-#include <algorithm>
 
 
-Enemy::Enemy(RenderController* renderController, EntityController* entityController, 
-			RenderableSDLTexture* enemyTexture, int startX, int startY, int screenWidth, int screenHeight): Entity(entityController)
+Enemy::Enemy(RenderController* renderController, RenderableSDLTexture* enemyTexture, 
+			int startX, int startY, int screenWidth, int screenHeight): Entity()
 {
 	_renderController = renderController;
 	_enemyTexture = enemyTexture;
@@ -25,11 +24,12 @@ Enemy::~Enemy()
 
 void Enemy::Render() const
 {
-	_renderController->RenderTexture(_enemyTexture, _xPos, _yPos);
+	_renderController->RenderWorldTexture(_enemyTexture, _xPos, _yPos);
 }
 
 void Enemy::Update()
 {
+	// TODO: Refactor
 	auto atTargetPosition = _xPos == _targetXPos && _yPos == _targetYPos;
 	if(atTargetPosition)
 	{
@@ -41,8 +41,8 @@ void Enemy::Update()
 			{
 				_nextMovementTime = 0;
 
-				_targetXPos = std::min(_screenWidth - _enemyTexture->TextureRect->w, std::max(0, _xPos + rand() % MovementRadius - MovementRadius/2));
-				_targetYPos = std::min(_screenHeight - _enemyTexture->TextureRect->h, std::max(0, _yPos + rand() % MovementRadius - MovementRadius/2));
+				_targetXPos = _xPos + rand() % MovementRadius - MovementRadius/2;
+				_targetYPos = _yPos + rand() % MovementRadius - MovementRadius/2;
 			}
 			else
 			{

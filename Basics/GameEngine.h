@@ -6,6 +6,7 @@
 #include "TextureController.h"
 #include "LightingController.h"
 #include "TimeController.h"
+#include "TileController.h"
 
 class EntityController;
 
@@ -19,7 +20,8 @@ public:
 				KeyboardController* keyboardController,
 				TextureController* textureController, 
 				EntityController* entityController,
-				TimeController* timeController);
+				TimeController* timeController,
+				TileController* tileController);
 	~GameEngine();
 	void Start();
 
@@ -30,8 +32,10 @@ private :
 	TextureController* _textureController;
 	EntityController* _entityController;
 	TimeController* _timeController;
+	TileController* _tileController;
 
 	GameState _gameState;
+	double _secondsPerFrame;
 
 	void LoadTextures() const;
 	void CreateEntities() const;

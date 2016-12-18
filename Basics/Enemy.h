@@ -7,7 +7,8 @@
 class Enemy : public Entity
 {
 public:
-	Enemy(RenderController* renderController, EntityController* entityController, RenderableSDLTexture* enemyTexture, int startX, int startY, int screenWidth, int screenHeight);
+	Enemy(RenderController* renderController, RenderableSDLTexture* enemyTexture, 
+		int startX, int startY, int screenWidth, int screenHeight);
 	~Enemy();
 	void Render() const override;
 	void Update() override;
