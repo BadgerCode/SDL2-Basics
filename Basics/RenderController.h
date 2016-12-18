@@ -4,7 +4,6 @@
 #include "SDL2/SDL_ttf.h"
 #include "RenderableSDLTexture.h"
 #include <vector>
-#include "TextureController.h"
 #include "WorldPositionController.h"
 
 class WorldPositionController;
@@ -12,7 +11,8 @@ class WorldPositionController;
 class RenderController
 {
 public:
-	RenderController(SDL_Renderer* renderer, TextureController* textureController, WorldPositionController* worldPositionController, int screenWidth, int screenHeight);
+	RenderController(SDL_Renderer* renderer, WorldPositionController* worldPositionController, 
+					int screenWidth, int screenHeight);
 	~RenderController();
 
 	void ClearScreen() const;
@@ -27,7 +27,6 @@ public:
 
 private :
 	SDL_Renderer* _sdlRenderer;
-	TextureController* _textureController;
 	WorldPositionController* _worldPositionController;
 
 	int _screenWidth;

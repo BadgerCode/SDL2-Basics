@@ -1,6 +1,5 @@
 #pragma once
 
-#include "SDL2/SDL_ttf.h"
 #include "KeyboardController.h"
 #include "RenderController.h"
 #include "RenderableSDLTexture.h"
@@ -19,13 +18,13 @@ class Player : public Entity
 {
 public:
 	Player(RenderController* renderController, KeyboardController* keyboardController, 
-			RenderableSDLTexture* playerTexture, LightSource* playerLight,
-			int startX, int startY, int screenWidth, int screenHeight);
+			RenderableSDLTexture* playerTexture, LightSource* playerLight);
 	~Player();
 
 	void Render() const override;
 	void Update() override;
 	std::pair<int, int> GetPosition() const override;
+	void SetPosition(int worldX, int worldY) override;
 private:
 	RenderController* _renderController;
 	KeyboardController* _keyboardController;
@@ -37,7 +36,5 @@ private:
 	int _height;
 	int _worldX;
 	int _worldY;
-	int _screenX;
-	int _screenY;
 };
 

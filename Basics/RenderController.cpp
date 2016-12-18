@@ -2,10 +2,10 @@
 #include <SDL2/SDL_ttf.h>
 
 
-RenderController::RenderController(SDL_Renderer* renderer, TextureController* textureController, WorldPositionController* worldPositionController, int screenWidth, int screenHeight)
+RenderController::RenderController(SDL_Renderer* renderer, WorldPositionController* worldPositionController, 
+									int screenWidth, int screenHeight)
 {
 	_sdlRenderer = renderer;
-	_textureController = textureController;
 	_worldPositionController = worldPositionController;
 
 	_screenWidth = screenWidth;

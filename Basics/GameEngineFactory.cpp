@@ -20,17 +20,16 @@ GameEngine* GameEngineFactory::Create(SDL_Renderer* sdlRenderer, int screenWidth
 	auto worldPositionController = new WorldPositionController(screenWidth, screenHeight);
 	auto timeController = new TimeController();
 
-	auto renderController = new RenderController(sdlRenderer, textureController, worldPositionController, screenWidth, screenHeight);
+	auto renderController = new RenderController(sdlRenderer, worldPositionController, screenWidth, screenHeight);
 
-	auto playerX = 500;
-	auto playerY = 500;
 	auto playerLight = textureController->GetTexture("resources/playerlight.png");
 	SDL_SetTextureBlendMode(playerLight->RawTexture, SDL_BLENDMODE_BLEND);
-	auto playerLightSource = new LightSource(playerLight, playerX, playerY);
+	auto playerLightSource = new LightSource(playerLight, 0, 0);
 
 	auto player = new Player(renderController, keyboardController,
 							textureController->GetTexture("resources/player.png"),
-							playerLightSource, playerX, playerY, screenWidth, screenHeight);
+							playerLightSource);
+	player->SetPosition(500, 500);
 
 	worldPositionController->SetTargetEntity(player, screenWidth / 2, screenHeight / 2);
 

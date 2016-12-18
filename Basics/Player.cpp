@@ -3,22 +3,18 @@
 
 
 Player::Player(RenderController* renderController, KeyboardController* keyboardController, 
-				RenderableSDLTexture* playerTexture, LightSource* playerLight,
-				int startX, int startY, int screenWidth, int screenHeight): Entity()
+				RenderableSDLTexture* playerTexture, LightSource* playerLight): Entity()
 {
 	_renderController = renderController;
 	_keyboardController = keyboardController;
 
-	_worldX = startX;
-	_worldY = startY;
+	_worldX = 0;
+	_worldY = 0;
 
 	_playerTexture = playerTexture;
 	_playerLight = playerLight;
 	_width = _playerTexture->TextureRect->w;
 	_height = _playerTexture->TextureRect->h;
-
-	_screenX = screenWidth / 2;
-	_screenY = screenHeight / 2;
 }
 
 Player::~Player()
@@ -47,4 +43,10 @@ void Player::Update()
 std::pair<int, int> Player::GetPosition() const
 {
 	return std::pair<int, int>(_worldX, _worldY);
+}
+
+void Player::SetPosition(int worldX, int worldY)
+{
+	_worldX = worldX;
+	_worldY = worldY;
 }

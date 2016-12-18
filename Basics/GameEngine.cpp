@@ -55,10 +55,12 @@ void GameEngine::LoadTextures() const
 
 void GameEngine::CreateEntities() const
 {
-	_entityController->AddEntity(new Enemy(_renderController, _textureController->GetTexture("resources/skeleton.png"), 10, 10));
-	_entityController->AddEntity(new Enemy(_renderController, _textureController->GetTexture("resources/skeleton.png"), 120, 200));
-	_entityController->AddEntity(new Enemy(_renderController, _textureController->GetTexture("resources/skeleton.png"), 900, 300));
-	_entityController->AddEntity(new Enemy(_renderController, _textureController->GetTexture("resources/skeleton.png"), 250, 500));
+	for(int i = 0; i < 30; i++)
+	{
+		auto enemy = new Enemy(_renderController, _textureController->GetTexture("resources/skeleton.png"));
+		enemy->SetPosition(rand() % 20 * 100, rand() % 20 * 100);
+		_entityController->AddEntity(enemy);
+	}
 }
 
 void GameEngine::AddLightSources()
