@@ -76,8 +76,7 @@ void GameEngine::GameLoop()
 		_renderController->UpdateScreen();
 
 		auto duration = std::chrono::duration<double>(std::chrono::high_resolution_clock::now() - startTime).count() * 1000;
-		printf("Frame duration: %fms\n", ceil(duration));
-		SDL_Delay(std::max(static_cast<double>(0), _secondsPerFrame - duration));
+		SDL_Delay(static_cast<Uint32>(std::max(static_cast<double>(0), _secondsPerFrame - duration)));
 	}
 }
 

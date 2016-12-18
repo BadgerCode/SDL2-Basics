@@ -40,15 +40,15 @@ void TileController::Render() const
 	}
 
 	auto screenCorners = _worldPositionController->GetWorldPosForEdgeOfScreen();
-	auto firstRow = std::max(static_cast<double>(0), std::floor(static_cast<double>(screenCorners.first.second) / TileHeight));
-	auto lastRow = std::min(static_cast<double>(_tiles.size() - 1), std::ceil(static_cast<double>(screenCorners.second.second) / TileHeight));
+	auto firstRow = static_cast<int>(std::max(static_cast<double>(0), floor(static_cast<double>(screenCorners.first.second) / TileHeight)));
+	auto lastRow = static_cast<int>(std::min(static_cast<double>(_tiles.size() - 1), ceil(static_cast<double>(screenCorners.second.second) / TileHeight)));
 
-	auto firstCol = std::max(static_cast<double>(0), std::floor(static_cast<double>(screenCorners.first.first) / TileWidth));
-	auto lastCol = std::min(static_cast<double>(_tiles[0].size() - 1), std::ceil(static_cast<double>(screenCorners.second.first) / TileWidth));
+	auto firstCol = static_cast<int>(std::max(static_cast<double>(0), floor(static_cast<double>(screenCorners.first.first) / TileWidth)));
+	auto lastCol = static_cast<int>(std::min(static_cast<double>(_tiles[0].size() - 1), ceil(static_cast<double>(screenCorners.second.first) / TileWidth)));
 
-	for(size_t i = firstRow; i <= lastRow; i++)
+	for(auto i = firstRow; i <= lastRow; i++)
 	{
-		for(size_t j = firstCol; j <= lastCol; j++)
+		for(auto j = firstCol; j <= lastCol; j++)
 		{
 			auto tile = _tiles[i][j];
 			if(tile != nullptr)

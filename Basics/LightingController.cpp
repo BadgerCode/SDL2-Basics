@@ -66,9 +66,9 @@ int LightingController::GetDayBrightness() const
 	case TimeOfDay::Night:
 		return 0;
 	case TimeOfDay::Dawn:
-		return 255 * _timeController->GetPercentageOfDawnCompleted();
+		return static_cast<int>(255 * _timeController->GetPercentageOfDawnCompleted());
 	case TimeOfDay::Dusk:
-		return 255 - 255 * _timeController->GetPercentageOfDuskCompleted();
+		return static_cast<int>(255 - 255 * _timeController->GetPercentageOfDuskCompleted());
 	default:
 		return 255;
 	}
