@@ -68,11 +68,10 @@ void GameEngine::AddLightSources()
 	_testLightTexture = _textureController->GetTexture("resources/lightsource.png");
 	SDL_SetTextureBlendMode(_testLightTexture->RawTexture, SDL_BLENDMODE_BLEND);
 
-	_lightingController->AddLightSource(new LightSource(_testLightTexture, 100, 100));
-	_lightingController->AddLightSource(new LightSource(_testLightTexture, 300, 200));
-	_lightingController->AddLightSource(new LightSource(_testLightTexture, 1000, 400));
-	_lightingController->AddLightSource(new LightSource(_testLightTexture, 170, 700));
-	_lightingController->AddLightSource(new LightSource(_testLightTexture, 650, 600));
+	for (int i = 0; i < 20; i++)
+	{
+		_lightingController->AddLightSource(new LightSource(_testLightTexture, rand() % 200 * 10, rand() % 200 * 10));
+	}
 }
 
 void GameEngine::GameLoop()
