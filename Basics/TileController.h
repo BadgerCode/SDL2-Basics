@@ -12,7 +12,7 @@ private:
 	RenderController* _renderController;
 
 	std::vector<std::vector<Tile*>> _tiles;
-	static const int TileWidth = 100;
-	static const int TileHeight = 100;
+	static const int TileWidth = 20;
+	static const int TileHeight = 20;
 };
 
