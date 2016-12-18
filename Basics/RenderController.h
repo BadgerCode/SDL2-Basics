@@ -17,8 +17,6 @@ public:
 
 	void ClearScreen() const;
 	void UpdateScreen() const;
-//	void DrawBackground() const;
-//	void PreloadBackground();
 
 	void RenderWorldTexture(RenderableSDLTexture* texture, int x, int y) const;
 	void RenderScreenTexture(RenderableSDLTexture* texture, int x, int y) const;

@@ -19,13 +19,10 @@ Player::Player(RenderController* renderController, KeyboardController* keyboardC
 
 	_screenX = screenWidth / 2;
 	_screenY = screenHeight / 2;
-
-	_playerFont = TTF_OpenFont("resources/arial.ttf", 50);
 }
 
 Player::~Player()
 {
-	TTF_CloseFont(_playerFont);
 	delete _playerLight;
 }
 
@@ -40,8 +37,6 @@ void Player::Update()
 
 	// TODO: Diagonal speed needs to be fixed (is too fast)
 	int speed = 3;
-//	_worldX = std::min(_screenWidth - _width, std::max(0, _worldX + speed * (userInput.Right - userInput.Left)));
-//	_worldY = std::min(_screenHeight - _height, std::max(0, _worldY + speed * (userInput.Down - userInput.Up)));
 	_worldX = _worldX + speed * (userInput.Right - userInput.Left);
 	_worldY = _worldY + speed * (userInput.Down - userInput.Up);
 

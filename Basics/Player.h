@@ -39,7 +39,5 @@ private:
 	int _worldY;
 	int _screenX;
 	int _screenY;
-
-	TTF_Font* _playerFont;
 };
 
