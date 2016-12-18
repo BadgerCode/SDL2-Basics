@@ -32,10 +32,21 @@ void RenderController::UpdateScreen() const
 
 void RenderController::RenderWorldTexture(RenderableSDLTexture* texture, int x, int y) const
 {
-	// TODO: Don't render if outside of screen
 	auto screenPos = _worldPositionController->GetScreenPosFromWorldPos(x, y);
+	auto screenX = screenPos.first - texture->TextureRect->w / 2;
+	auto screenY = screenPos.second - texture->TextureRect->h / 2;
 
-	RenderScreenTexture(texture, screenPos.first, screenPos.second);
+	if (screenX > _screenWidth || screenY > _screenHeight)
+	{
+		return;
+	}
+
+	if(screenX + texture->TextureRect->w < 0 || screenY + texture->TextureRect->h < 0)
+	{
+		return;
+	}
+
+	RenderScreenTexture(texture, screenX, screenY);
 }
 
 void RenderController::RenderScreenTexture(RenderableSDLTexture* texture, int x, int y) const

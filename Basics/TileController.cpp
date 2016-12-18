@@ -9,12 +9,16 @@ TileController::TileController(TextureController* textureController, RenderContr
 	auto tilesWidth = static_cast<int>(ceil(static_cast<double>(worldWidth) / TileWidth));
 	auto tilesHeight = static_cast<int>(ceil(static_cast<double>(worldHeight) / TileHeight));
 
+	auto texture = textureController->GetTexture("resources/grass.png");
+	auto textureHalfWidth = texture->TextureRect->w / 2;
+	auto textureHalfHeight = texture->TextureRect->h / 2;
+
 	for(auto y = 0; y < tilesHeight; y++)
 	{
 		_tiles.push_back(std::vector<Tile*>(tilesWidth));
 		for(auto x = 0; x < tilesWidth; x++)
 		{
-			_tiles[y][x] = new Tile(_renderController, textureController->GetTexture("resources/grass.png"), x * TileWidth, y * TileHeight);
+			_tiles[y][x] = new Tile(_renderController, texture, x * TileWidth + textureHalfWidth, y * TileHeight + textureHalfHeight);
 		}
 	}
 }

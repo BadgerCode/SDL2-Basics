@@ -21,8 +21,8 @@ GameEngine* GameEngineFactory::Create(SDL_Renderer* sdlRenderer, int screenWidth
 
 	auto renderController = new RenderController(sdlRenderer, textureController, worldPositionController, screenWidth, screenHeight);
 
-	auto playerX = screenWidth / 2;
-	auto playerY = screenHeight / 2;
+	auto playerX = 500;
+	auto playerY = 500;
 	auto playerLight = textureController->GetTexture("resources/playerlight.png");
 	SDL_SetTextureBlendMode(playerLight->RawTexture, SDL_BLENDMODE_BLEND);
 	auto playerLightSource = new LightSource(playerLight, playerX, playerY);
@@ -40,7 +40,7 @@ GameEngine* GameEngineFactory::Create(SDL_Renderer* sdlRenderer, int screenWidth
 	auto lightingController = new LightingController(sdlRenderer, renderController, textureController, timeController, screenWidth, screenHeight);
 	lightingController->AddLightSource(playerLightSource);
 
-	auto tileController = new TileController(textureController, renderController, screenWidth, screenHeight);
+	auto tileController = new TileController(textureController, renderController, 2000, 2000);
 
 	return new GameEngine(renderController, lightingController, keyboardController,
 							textureController, entityController, timeController, tileController);

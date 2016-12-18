@@ -89,7 +89,6 @@ void LightingController::RenderLightSources() const
 {
 	for (auto lightSource : _lightSources)
 	{
-		auto worldPos = lightSource->GetWorldPosition();
-		_renderController->RenderWorldTexture(lightSource->Texture, worldPos.first, worldPos.second);
+		_renderController->RenderWorldTexture(lightSource->Texture, lightSource->_worldX, lightSource->_worldY);
 	}
 }

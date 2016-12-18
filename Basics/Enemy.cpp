@@ -1,7 +1,6 @@
 #include "Enemy.h"
 #include "EntityController.h"
 #include <cstdlib>
-#include <algorithm>
 
 
 Enemy::Enemy(RenderController* renderController, RenderableSDLTexture* enemyTexture, 
@@ -30,6 +29,7 @@ void Enemy::Render() const
 
 void Enemy::Update()
 {
+	// TODO: Refactor
 	auto atTargetPosition = _xPos == _targetXPos && _yPos == _targetYPos;
 	if(atTargetPosition)
 	{
@@ -41,8 +41,8 @@ void Enemy::Update()
 			{
 				_nextMovementTime = 0;
 
-				_targetXPos = std::min(_screenWidth - _enemyTexture->TextureRect->w, std::max(0, _xPos + rand() % MovementRadius - MovementRadius/2));
-				_targetYPos = std::min(_screenHeight - _enemyTexture->TextureRect->h, std::max(0, _yPos + rand() % MovementRadius - MovementRadius/2));
+				_targetXPos = _xPos + rand() % MovementRadius - MovementRadius/2;
+				_targetYPos = _yPos + rand() % MovementRadius - MovementRadius/2;
 			}
 			else
 			{

@@ -28,7 +28,7 @@ Player::~Player()
 
 void Player::Render() const
 {
-	_renderController->RenderWorldTexture(_playerTexture, _worldX - _width / 2, _worldY - _height / 2);
+	_renderController->RenderWorldTexture(_playerTexture, _worldX, _worldY);
 }
 
 void Player::Update()
@@ -40,7 +40,8 @@ void Player::Update()
 	_worldX = _worldX + speed * (userInput.Right - userInput.Left);
 	_worldY = _worldY + speed * (userInput.Down - userInput.Up);
 
-	_playerLight->SetWorldPosition(_worldX, _worldY);
+	_playerLight->_worldX = _worldX;
+	_playerLight->_worldY = _worldY;
 }
 
 std::pair<int, int> Player::GetPosition() const
