@@ -42,6 +42,10 @@ GameEngine* GameEngineFactory::Create(SDL_Renderer* sdlRenderer, int screenWidth
 
 	auto tileController = new TileController(worldPositionController, textureController, renderController, 2000, 2000);
 
+	auto fontController = new FontController();
+	auto hudController = new HUDController(fontController, renderController);
+
 	return new GameEngine(renderController, lightingController, keyboardController,
-							textureController, entityController, timeController, tileController);
+						  textureController, entityController, timeController, 
+						  tileController, hudController);
 }

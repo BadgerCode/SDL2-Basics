@@ -7,7 +7,9 @@
 #include "LightingController.h"
 #include "TimeController.h"
 #include "TileController.h"
+#include "HUDController.h"
 
+class HUDController;
 class EntityController;
 
 enum class GameState { PLAY, EXIT };
@@ -21,7 +23,8 @@ public:
 				TextureController* textureController, 
 				EntityController* entityController,
 				TimeController* timeController,
-				TileController* tileController);
+				TileController* tileController,
+				HUDController* hudController);
 	~GameEngine();
 	void Start();
 
@@ -33,6 +36,7 @@ private :
 	EntityController* _entityController;
 	TimeController* _timeController;
 	TileController* _tileController;
+	HUDController* _hudController;
 
 	GameState _gameState;
 	double _secondsPerFrame;

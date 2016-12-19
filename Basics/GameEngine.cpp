@@ -10,7 +10,8 @@ GameEngine::GameEngine(RenderController* renderController,
 						TextureController* textureController, 
 						EntityController* entityController,
 						TimeController* timeController,
-						TileController* tileController)
+						TileController* tileController,
+						HUDController* hudController)
 {
 	_renderController = renderController;
 	_lightingController = lightingController;
@@ -19,6 +20,7 @@ GameEngine::GameEngine(RenderController* renderController,
 	_entityController = entityController;
 	_timeController = timeController;
 	_tileController = tileController;
+	_hudController = hudController;
 
 	_gameState = GameState::PLAY;
 
@@ -31,9 +33,14 @@ GameEngine::GameEngine(RenderController* renderController,
 GameEngine::~GameEngine()
 {
 	delete _renderController;
+	delete _lightingController;
+	delete _keyboardController;
 	delete _textureController;
 	delete _entityController;
-	delete _keyboardController;
+	delete _timeController;
+	delete _tileController;
+	delete _hudController;
+
 	delete _testLightTexture;
 }
 
@@ -42,6 +49,7 @@ void GameEngine::Start()
 	LoadTextures();
 	CreateEntities();
 	AddLightSources();
+	_hudController->Initialise();
 	GameLoop();
 }
 
@@ -87,11 +95,12 @@ void GameEngine::GameLoop()
 		_entityController->UpdateAll();
 		
 		_renderController->ClearScreen();
+
 		_tileController->Render();
-
 		_entityController->RenderAll();
-
 		_lightingController->RenderLighting();
+		_hudController->Render();
+
 		_renderController->UpdateScreen();
 
 		auto duration = std::chrono::duration<double>(std::chrono::high_resolution_clock::now() - startTime).count() * 1000;
