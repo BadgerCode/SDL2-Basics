@@ -59,9 +59,6 @@ void RenderController::RenderScreenTexture(RenderableSDLTexture* texture, int x,
 
 void RenderController::RenderScreenText(TTF_Font* font, const char* text, SDL_Color color, int x, int y) const
 {
-	// TODO: Do this properly
-	// Wrap fonts in a custom model: could use RenderableSDLTexture
-	// Create a font controller (same kind of idea as texture controller)
 	auto surface = TTF_RenderText_Solid(font, text, color);
 	auto texture = SDL_CreateTextureFromSurface(_sdlRenderer, surface);
 	SDL_FreeSurface(surface);
@@ -72,11 +69,9 @@ void RenderController::RenderScreenText(TTF_Font* font, const char* text, SDL_Co
 	textureRect.x = x;
 	textureRect.y = y;
 
-	auto renderableTexture = new RenderableSDLTexture(texture, textureRect.w, textureRect.h);
+	SDL_RenderCopy(_sdlRenderer, texture, nullptr, &textureRect);
 
-	RenderScreenTexture(renderableTexture, x, y);
-
-//	delete renderableTexture; // Make sure to do this when this is properly implemented
+	SDL_DestroyTexture(texture);
 }
 
 void RenderController::DrawScreenRectangle(SDL_Rect* rect, int r, int g, int b, int a) const

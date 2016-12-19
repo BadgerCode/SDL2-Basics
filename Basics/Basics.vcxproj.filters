@@ -93,6 +93,9 @@
     <ClCompile Include="LightSource.cpp">
       <Filter>Source Files\Models</Filter>
     </ClCompile>
+    <ClCompile Include="FontController.cpp">
+      <Filter>Source Files\Controllers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameEngine.h">
@@ -148,6 +151,9 @@
     </ClInclude>
     <ClInclude Include="LightSource.h">
       <Filter>Header Files\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="FontController.h">
+      <Filter>Header Files\Controllers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

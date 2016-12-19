@@ -1,6 +1,7 @@
 #include "GameEngine.h"
 #include <chrono>
 #include "Enemy.h"
+#include "FontController.h"
 
 
 GameEngine::GameEngine(RenderController* renderController, 

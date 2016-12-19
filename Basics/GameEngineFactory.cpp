@@ -3,6 +3,7 @@
 #include "TileController.h"
 #include "WorldPositionController.h"
 #include "Player.h"
+#include "FontController.h"
 
 
 GameEngineFactory::GameEngineFactory()
